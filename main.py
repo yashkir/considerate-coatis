@@ -2,6 +2,8 @@
 
 import urwid
 
+import game_screen
+
 
 def render_new_game() -> None:
     """Display a New Game prompt with a y/n"""
@@ -13,6 +15,8 @@ def render_new_game() -> None:
     def handle_input(key: str) -> None:
         if key.lower() == 'y':
             text.set_text("TODO start a new game here")
+            loop.stop()
+            game_screen.render_game_screen()
         elif key.lower() == 'n':
             loop.stop()
             quit()
