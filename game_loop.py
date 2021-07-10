@@ -5,6 +5,10 @@ class game:
     def __init__(self) -> None:
         self.playing = False
         self.widgets = []
+        self.screen = curses.initscr()
+        curses.noecho()
+        curses.cbreak()
+        self.screen.keypad(True)
 
     def update(self):
         ...
@@ -17,8 +21,12 @@ class game:
             self.handle_input()
             
     
-    def handle_input(self, key: str):
-        ...
+    def handle_input(self):
+        key = self.screen.getkey()
+        print(key)
+        if key == "K_ESCAPE" or key == "q":
+            curses.endwin()
+            self.playing = False
     
     def render_game_screen(self) -> None:
         ...
