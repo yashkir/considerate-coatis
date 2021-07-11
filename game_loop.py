@@ -50,3 +50,4 @@ class game:
 
 g = game()
 g.run()
+print(g.player.stats.atletic_ability)
