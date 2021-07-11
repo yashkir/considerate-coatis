@@ -1,5 +1,4 @@
-import curses
-#`│ ─ ┌ ┬ ┐ ├ ┼ ┤ └ ┴ ┘`
+# `│ ─ ┌ ┬ ┐ ├ ┼ ┤ └ ┴ ┘`
 
 def draw_square(screen, x, y, width, height, label):
     for wx in range(width):

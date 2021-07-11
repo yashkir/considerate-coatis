@@ -28,7 +28,6 @@ class game:
     
     def handle_input(self):
         key = self.screen.getkey()
-        #print(key)
         if key == "ESCAPE" or key == "q":
             curses.endwin()
             self.playing = False
