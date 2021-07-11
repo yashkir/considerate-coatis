@@ -2,8 +2,8 @@
 
 import urwid
 
-from game_screen import GameScreen
-from new_game_screen import NewGameScreen
+from screens.game_screen import GameScreen
+from screens.new_game_screen import NewGameScreen
 
 
 class GameController():
@@ -21,7 +21,7 @@ class GameController():
     def __start_game(self, object):
         """Replace the MainLoop widget with a new GameScreen"""
         self.game_screen = GameScreen()
-        urwid.connect_signal(self.game_screen, 'quit', self._quit)
+        urwid.connect_signal(self.game_screen, 'quit', self.__quit)
         self.loop.widget = self.game_screen
 
     def __quit(self, object):
