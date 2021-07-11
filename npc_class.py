@@ -1,11 +1,9 @@
+from player import Stats
 
 class npc:
 
-    def __init__(self, charisma, strength, wisdom, smartness, x, y, game):
-        self.charisma = charisma
-        self.strength = strength
-        self.wisdom = wisdom
-        self.smartness = smartness
+    def __init__(self, stats, x, y, game):
+        self.stats = stats
         self.x = x
         self.y = y
         self.game = game
@@ -15,4 +13,5 @@ class npc:
         prompt = " "
         # prompt = get_prompt()
         self.game.screen.addstr(y, x, prompt)
+
         

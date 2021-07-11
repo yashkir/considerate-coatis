@@ -1,6 +1,7 @@
 import curses
 from widgets import draw_square
 from npc_class import npc
+from player import Player, Stats
 
 class game:
 
@@ -14,11 +15,13 @@ class game:
         self.screen.keypad(True)
         self.height = self.screen.getmaxyx()[0]-1
         self.width = self.screen.getmaxyx()[1]-1
-        self.npc = npc(10, 11, 14, 7, 10, 7, self)
+        self.stats_box_pos = [2, round(self.width-self.width/3)+2]
+        self.player = Player(Stats(50,50,50,50), 0, 0, self)
 
     def update(self):
         self.screen.clear()
-        self.npc.say_prompt(4, round(self.height-self.height/3)+1)
+        self.player.stats.atletic_ability += 1
+        self.player.draw_stats()
         ...
 
     def run(self):
@@ -42,6 +45,7 @@ class game:
         draw_square(self.screen, 2, 1, round(self.width-self.width/3-2), round(self.height-self.height/3-1), "screen")
         draw_square(self.screen, round(self.width-self.width/3)+1, 1, round(self.width/3)-3, round(self.height-self.height/3-1), "stats")
         draw_square(self.screen, 2, round(self.height-self.height/3), self.width-4, round(self.height/3-1), "Text")
+        self.stats_box_pos = [2, round(self.width-self.width/3)+2]
         ...
 
 g = game()
