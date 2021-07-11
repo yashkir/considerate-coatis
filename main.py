@@ -1,28 +1,20 @@
-#!/usr/bin/env python3
-
 import urwid
 
 from screens.game_screen import GameScreen
 from screens.new_game_screen import NewGameScreen
 
 
-def render_new_game() -> None:
-    """Display a New Game prompt with a y/n"""
-    text = urwid.Text("Welcome, would you like to start a new game? y/n")
-    fill = urwid.Filler(text, 'top')
+class GameController():
+    """Shows a new game prompt and switches to the game screen or quits."""
 
-    box = urwid.LineBox(fill, title="New Game")
+    def __init__(self):
+        self.new_game_screen = NewGameScreen()
+        self.loop = urwid.MainLoop(self.new_game_screen)
 
-    def handle_input(key: str) -> None:
-        if key.lower() == 'y':
-            text.set_text("TODO start a new game here")
-            loop.stop()
-            game_screen.render_game_screen()
-        elif key.lower() == 'n':
-            loop.stop()
-            quit()
+        urwid.connect_signal(self.new_game_screen, 'start game', self.__start_game)
+        urwid.connect_signal(self.new_game_screen, 'quit', self.__quit)
 
-    loop = urwid.MainLoop(box, unhandled_input=handle_input)
+        self.loop.run()
 
     def __start_game(self, object):
         """Replace the MainLoop widget with a new GameScreen"""
@@ -35,4 +27,4 @@ def render_new_game() -> None:
 
 
 if __name__ == "__main__":
-    render_new_game()
+    GameController()
