@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 import urwid
 
 from screens.game_screen import GameScreen
