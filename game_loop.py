@@ -15,14 +15,14 @@ class game:
         self.width = self.screen.getmaxyx()[1]-1
 
     def update(self):
-        
+        self.screen.clear()
         ...
 
     def run(self):
         self.playing = True
         while self.playing:
-            self.render_game_screen()
             self.update()
+            self.render_game_screen()
             self.handle_input()
             
     
