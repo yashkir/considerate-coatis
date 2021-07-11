@@ -2,7 +2,12 @@
 
 import urwid
 
+<<<<<<< HEAD
 import game_screen
+=======
+from screens.game_screen import GameScreen
+from screens.new_game_screen import NewGameScreen
+>>>>>>> c26d09bcdea3d328b5cbdb9cb5004229d8e56879
 
 
 def render_new_game() -> None:
@@ -23,7 +28,18 @@ def render_new_game() -> None:
 
     loop = urwid.MainLoop(box, unhandled_input=handle_input)
 
+<<<<<<< HEAD
     loop.run()
+=======
+    def __start_game(self, object):
+        """Replace the MainLoop widget with a new GameScreen"""
+        self.game_screen = GameScreen()
+        urwid.connect_signal(self.game_screen, 'quit', self.__quit)
+        self.loop.widget = self.game_screen
+
+    def __quit(self, object):
+        raise urwid.ExitMainLoop()
+>>>>>>> c26d09bcdea3d328b5cbdb9cb5004229d8e56879
 
 
 if __name__ == "__main__":

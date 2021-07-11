@@ -1,4 +1,4 @@
-from player import Stats
+# from player import Stats
 
 class npc:
 
