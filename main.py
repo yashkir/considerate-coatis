@@ -1,5 +1,6 @@
 import urwid
 
+from logic.player import Player, Stats
 from logic.StateManager import StateManager
 from screens.game_screen import GameScreen
 from screens.new_game_screen import NewGameScreen
@@ -16,6 +17,7 @@ class GameController():
         self.state_manager_screen = StateManagerScreen()
         self.game_screen = GameScreen()
         self.state_manager = StateManager()
+        self.player = Player(Stats(50, 50, 50, 50), 1, 1)
 
         self.loop = urwid.MainLoop(self.new_game_screen)
 
@@ -53,6 +55,7 @@ class GameController():
         self.loop.widget = self.new_game_screen
 
     def __show_game_screen(self, signal_emitter=None):
+        self.player.draw_stats()
         self.loop.widget = self.game_screen
 
     def __show_restart_screen(self, signal_emitter=None):

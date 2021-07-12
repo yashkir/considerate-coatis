@@ -1,3 +1,5 @@
+import urwid
+
 
 class Stats:
     """Stats class to store all the stats that the npc and player will have."""
@@ -7,15 +9,11 @@ class Stats:
         self.charisma = charisma
         self.wisdom = wisdom
         self.smartness = smartness
+        self.stat_list = [self.atletic_ability, self.charisma, self.wisdom, self.smartness]
         self.stat_list = [
-            "athletic ability: " + str(self.atletic_ability), "charisma: " + str(self.charisma),
-            "wisdom: " + str(self.wisdom), "smartness: " + str(self.smartness)]
-
-    def update_stats(self):
-        """This will update the stats"""
-        self.stat_list = [
-            "athletic ability: " + str(self.atletic_ability), "charisma: " + str(self.charisma),
-            "wisdom: " + str(self.wisdom), "smartness: " + str(self.smartness)]
+            urwid.Text("athletic ability: " + str(self.atletic_ability)),
+            urwid.Text("charisma: " + str(self.charisma)),
+            urwid.Text("wisdom: " + str(self.wisdom)), urwid.Text("smartness: " + str(self.smartness))]
 
 
 class Player:
@@ -25,4 +23,7 @@ class Player:
         self.stats = stats
         self.x = x
         self.y = y
-        self.game = game
+
+    def draw_stats(self):
+        """This is where the player's stats will be drawn"""
+        ...
