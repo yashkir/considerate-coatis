@@ -1,7 +1,8 @@
 import urwid
 
 from screens.game_screen import GameScreen
-from screens.new_game_screen import NewGameScreen, RestartGameScreen
+from screens.new_game_screen import NewGameScreen
+from screens.restart_game_screen import RestartGameScreen
 
 
 class GameController():
