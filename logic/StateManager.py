@@ -1,6 +1,8 @@
 import json
 import os
 
+INITIAL_STATE_PATH = os.path.join("logic", "initial_state.json")
+
 
 class StateManager():
     """Exposes functionality for managing game state."""
@@ -10,18 +12,7 @@ class StateManager():
 
     def load_initial_state(self):
         """Generate a initial state for a new game."""
-        # TODO move this out to a json file
-        self.state = {
-            "in_progress": True,
-            "player": {
-                "name": "Player",
-                "stats": {
-                    "charisma": 20,
-                }
-            },
-            "location_id": 1,
-            "situation_id": None,
-        }
+        self.state = self.load_state(INITIAL_STATE_PATH)
 
     def save_state(self, path: str) -> None:
         """Save state to file."""
