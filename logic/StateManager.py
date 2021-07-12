@@ -1,6 +1,8 @@
 import json
 import os
 
+INITIAL_STATE_PATH = os.path.join("logic", "initial_state.json")
+
 
 class StateManager():
     """Exposes functionality for managing game state."""
@@ -10,8 +12,7 @@ class StateManager():
 
     def load_initial_state(self):
         """Generate a initial state for a new game."""
-        # TODO move this out to a json file
-        self.state = self.load_state("logic/inital_state.json")
+        self.state = self.load_state(INITIAL_STATE_PATH)
 
     def save_state(self, path: str) -> None:
         """Save state to file."""
@@ -29,7 +30,7 @@ class StateManager():
 if __name__ == "__main__":
     print("Testing StateManager...")
 
-    path = "inital_state.json"
+    path = "test.json"
 
     manager_a = StateManager()
     manager_a.load_initial_state()
@@ -46,7 +47,3 @@ if __name__ == "__main__":
         print("\tPASSED")
     else:
         print("\tFAILED")
-
-# for path in pathlib.Path("saves").iterdir():
-#     if path.is_file():
-#         print(str.split(path.name, '.')[0])

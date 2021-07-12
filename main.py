@@ -18,6 +18,7 @@ class GameController():
         self.state_manager = StateManager()
 
         self.loop = urwid.MainLoop(self.new_game_screen)
+
         urwid.connect_signal(self.new_game_screen, 'start game', self.__start)
         urwid.connect_signal(self.new_game_screen, 'quit', self.__quit)
         urwid.connect_signal(self.new_game_screen, 'load', self.__show_state_manager_screen)
@@ -34,31 +35,31 @@ class GameController():
 
         self.loop.run()
 
-    def __start(self, object):
+    def __start(self, signal_emitter=None):
         self.state_manager.load_initial_state()
-        self.loop.widget = self.game_screen
+        self.__show_game_screen()
 
-    def __quit(self, object):
+    def __quit(self, signal_emitter=None):
         raise urwid.ExitMainLoop()
 
-    def __show_restart_screen(self, object):
+    def __restart(self, signal_emitter=None):
+        self.loop.widget = self.new_game_screen
+
+    def __load_save(self, signal_emitter=None):
+        self.state_manager.load_state(self.state_manager_screen.chosen_save)
+        self.__show_game_screen()
+
+    def __show_new_game_screen(self, signal_emitter=None):
+        self.loop.widget = self.new_game_screen
+
+    def __show_game_screen(self, signal_emitter=None):
+        self.loop.widget = self.game_screen
+
+    def __show_restart_screen(self, signal_emitter=None):
         self.loop.widget = self.restart_game_screen
 
-    def __restart(self, object):
-        self.loop.widget = self.new_game_screen
-
-    def __show_game_screen(self, object):
-        self.loop.widget = self.game_screen
-
-    def __show_state_manager_screen(self, object):
+    def __show_state_manager_screen(self, signal_emitter=None):
         self.loop.widget = self.state_manager_screen
-
-    def __show_new_game_screen(self, object):
-        self.loop.widget = self.new_game_screen
-
-    def __load_save(self, object):
-        self.state_manager.load_state(self.state_manager_screen.chosen_save)
-        self.loop.widget = self.game_screen
 
 
 if __name__ == "__main__":
