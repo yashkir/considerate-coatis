@@ -46,3 +46,7 @@ if __name__ == "__main__":
         print("\tPASSED")
     else:
         print("\tFAILED")
+
+# for path in pathlib.Path("saves").iterdir():
+#     if path.is_file():
+#         print(str.split(path.name, '.')[0])
