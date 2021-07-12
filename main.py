@@ -12,11 +12,11 @@ class GameController():
     def __init__(self):
         self.new_game_screen = NewGameScreen()
         self.restart_game_screen = RestartGameScreen()
-        self.game_screen = GameScreen()
         self.state_manager_screen = StateManagerScreen()
+        self.game_screen = GameScreen()
 
         self.loop = urwid.MainLoop(self.new_game_screen)
-        urwid.connect_signal(self.new_game_screen, 'start game', self.__start_game)
+        urwid.connect_signal(self.new_game_screen, 'start game', self.__show_game_screen)
         urwid.connect_signal(self.new_game_screen, 'quit', self.__quit)
         urwid.connect_signal(self.new_game_screen, 'load', self.__show_state_manager_screen)
 
@@ -24,15 +24,12 @@ class GameController():
         urwid.connect_signal(self.restart_game_screen, 'go back', self.__show_game_screen)
         urwid.connect_signal(self.restart_game_screen, 'quit', self.__quit)
 
-        urwid.connect_signal(self.state_manager_screen, 'back', self.__show_game_screen)
-        urwid.connect_signal(self.state_manager_screen, 'load save', self.__load_save)
-        self.loop.run()
+        urwid.connect_signal(self.state_manager_screen, 'back', self.__show_new_game_screen)
 
-    def __start_game(self, object):
-        """Replace the MainLoop widget with a new GameScreen"""
         urwid.connect_signal(self.game_screen, 'quit', self.__quit)
         urwid.connect_signal(self.game_screen, 'restart', self.__show_restart_screen)
-        self.loop.widget = self.game_screen
+
+        self.loop.run()
 
     def __quit(self, object):
         raise urwid.ExitMainLoop()
@@ -44,11 +41,13 @@ class GameController():
         self.loop.widget = self.new_game_screen
 
     def __show_game_screen(self, object):
-        print('called')
         self.loop.widget = self.game_screen
 
     def __show_state_manager_screen(self, object):
         self.loop.widget = self.state_manager_screen
+
+    def __show_new_game_screen(self, object):
+        self.loop.widget = self.new_game_screen
 
     def __load_save(self, object):
         ...
