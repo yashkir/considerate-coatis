@@ -11,7 +11,7 @@ class StateManager():
     def load_initial_state(self):
         """Generate a initial state for a new game."""
         # TODO move this out to a json file
-        self.state = self.load_state("saves/inital_state.json")
+        self.state = self.load_state("logic/inital_state.json")
 
     def save_state(self, path: str) -> None:
         """Save state to file."""
