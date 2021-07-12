@@ -12,12 +12,13 @@ class GameController():
     """Shows a new game prompt and switches to the game screen or quits."""
 
     def __init__(self):
+        self.player = Player(Stats(50, 50, 50, 50), 1, 1)
+
         self.new_game_screen = NewGameScreen()
         self.restart_game_screen = RestartGameScreen()
         self.state_manager_screen = StateManagerScreen()
-        self.game_screen = GameScreen()
+        self.game_screen = GameScreen(self.player)
         self.state_manager = StateManager()
-        self.player = Player(Stats(50, 50, 50, 50), 1, 1)
 
         self.loop = urwid.MainLoop(self.new_game_screen)
 

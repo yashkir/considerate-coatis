@@ -4,13 +4,16 @@ import urwid
 class GameScreen(urwid.LineBox):
     """Main game screen."""
 
-    def __init__(self):
+    def __init__(self, player):
         self.text = urwid.Text("placeholder")
         fill = urwid.Filler(self.text, 'top')
+        self.player = player
 
         # The main boxes
+        stats_box = urwid.LineBox(
+            urwid.ListBox(urwid.SimpleFocusListWalker(self.player.stats.stat_list_text)),
+            title="stats")
         location_box = urwid.LineBox(fill, title="location")
-        stats_box = urwid.LineBox(fill, title="stats")
         event_box = urwid.LineBox(fill, title="event")
 
         # buttons

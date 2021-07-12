@@ -10,8 +10,8 @@ class Stats:
         self.wisdom = wisdom
         self.smartness = smartness
         self.stat_list = [self.atletic_ability, self.charisma, self.wisdom, self.smartness]
-        self.stat_list = [
-            urwid.Text("athletic ability: " + str(self.atletic_ability)),
+        self.stat_list_text = [
+            urwid.Text("strength: " + str(self.atletic_ability)),
             urwid.Text("charisma: " + str(self.charisma)),
             urwid.Text("wisdom: " + str(self.wisdom)), urwid.Text("smartness: " + str(self.smartness))]
 
@@ -19,10 +19,11 @@ class Stats:
 class Player:
     """The player class"""
 
-    def __init__(self, stats, x, y, game):
+    def __init__(self, stats, x, y):
         self.stats = stats
         self.x = x
         self.y = y
+        # self.stats_fill = urwid.Filler(self.stats.stat_list_text, 'top')
 
     def draw_stats(self):
         """This is where the player's stats will be drawn"""
