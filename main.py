@@ -18,11 +18,14 @@ class GameController():
         self.loop = urwid.MainLoop(self.new_game_screen)
         urwid.connect_signal(self.new_game_screen, 'start game', self.__start_game)
         urwid.connect_signal(self.new_game_screen, 'quit', self.__quit)
-        urwid.connect_signal(self.new_game_screen, 'load', self.__load_save)
+        urwid.connect_signal(self.new_game_screen, 'load', self.__show_state_manager_screen)
 
         urwid.connect_signal(self.restart_game_screen, 'restart', self.__restart)
         urwid.connect_signal(self.restart_game_screen, 'go back', self.__show_game_screen)
         urwid.connect_signal(self.restart_game_screen, 'quit', self.__quit)
+
+        urwid.connect_signal(self.state_manager_screen, 'back', self.__show_game_screen)
+        urwid.connect_signal(self.state_manager_screen, 'load save', self.__load_save)
         self.loop.run()
 
     def __start_game(self, object):
@@ -41,9 +44,13 @@ class GameController():
         self.loop.widget = self.new_game_screen
 
     def __show_game_screen(self, object):
+        print('called')
         self.loop.widget = self.game_screen
 
-    def __load_save(self):
+    def __show_state_manager_screen(self, object):
+        self.loop.widget = self.state_manager_screen
+
+    def __load_save(self, object):
         ...
 
 
