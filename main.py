@@ -3,6 +3,7 @@ import urwid
 from screens.game_screen import GameScreen
 from screens.new_game_screen import NewGameScreen
 from screens.restart_game_screen import RestartGameScreen
+from screens.state_manager_screen import StateManagerScreen
 
 
 class GameController():
@@ -12,6 +13,8 @@ class GameController():
         self.new_game_screen = NewGameScreen()
         self.restart_game_screen = RestartGameScreen()
         self.game_screen = GameScreen()
+        self.state_manager_screen = StateManagerScreen()
+
         self.loop = urwid.MainLoop(self.new_game_screen)
         urwid.connect_signal(self.new_game_screen, 'start game', self.__start_game)
         urwid.connect_signal(self.new_game_screen, 'quit', self.__quit)
