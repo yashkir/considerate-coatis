@@ -1,0 +1,23 @@
+[
+    {
+        "prompt": "You can either study for the upcoming test, or rest for the upcoming race.",
+        "options": [
+            {
+                "response": "I will study for the test.",
+                    "stats": {
+                        "social": -10,
+                        "athletic": -10,
+                        "academic": 10
+                    }
+                },
+                {
+                    "response": "I will rest for the race.",
+                    "stats": {
+                        "social": 10,
+                        "athletic": 5,
+                        "academic": -5
+                    }
+                }
+        ]
+    }
+]
