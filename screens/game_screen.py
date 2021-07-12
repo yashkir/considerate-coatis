@@ -20,8 +20,8 @@ class GameScreen(urwid.LineBox):
         button_box = urwid.LineBox(button_columns, title="buttons")
 
         # Arrange a pile with two columns on top and events on bottom
-        top_columns = urwid.Columns([location_box, stats_box])
-        pile = urwid.Pile([top_columns, event_box, button_box])
+        top_columns = urwid.Columns([('weight', 3.5, location_box), stats_box])
+        pile = urwid.Pile([('weight', 3, top_columns), ('weight', 1.5, event_box), button_box])
 
         # Put everything on one box
         # box = urwid.LineBox(pile, title="Game Screen")
