@@ -11,17 +11,7 @@ class StateManager():
     def load_initial_state(self):
         """Generate a initial state for a new game."""
         # TODO move this out to a json file
-        self.state = {
-            "in_progress": True,
-            "player": {
-                "name": "Player",
-                "stats": {
-                    "charisma": 20,
-                }
-            },
-            "location_id": 1,
-            "situation_id": None,
-        }
+        self.state = self.load_state("saves/inital_state.json")
 
     def save_state(self, path: str) -> None:
         """Save state to file."""
@@ -39,7 +29,7 @@ class StateManager():
 if __name__ == "__main__":
     print("Testing StateManager...")
 
-    path = "test.json"
+    path = "inital_state.json"
 
     manager_a = StateManager()
     manager_a.load_initial_state()

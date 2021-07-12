@@ -8,7 +8,8 @@ class NewGameScreen(urwid.LineBox):
         text = urwid.Filler(urwid.Text("Welcome, would you like to start a new game?", 'center'), 'middle')
         button_yes = urwid.Button("YES", self.__start_game)
         button_no = urwid.Button("NO", self.__quit)
-        buttons = urwid.Filler(urwid.GridFlow([button_yes, button_no], 10, 5, 1, 'center'))
+        button_load = urwid.Button("LOAD", self.__quit)
+        buttons = urwid.Filler(urwid.GridFlow([button_yes, button_no, button_load], 10, 5, 1, 'center'))
 
         super().__init__(urwid.Pile([text, buttons]), title="New Game")
 
@@ -19,4 +20,4 @@ class NewGameScreen(urwid.LineBox):
         self._emit('quit')
 
 
-urwid.register_signal(NewGameScreen, ['start game', 'quit'])
+urwid.register_signal(NewGameScreen, ['start game', 'quit', 'load'])

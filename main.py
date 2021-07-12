@@ -15,6 +15,7 @@ class GameController():
         self.loop = urwid.MainLoop(self.new_game_screen)
         urwid.connect_signal(self.new_game_screen, 'start game', self.__start_game)
         urwid.connect_signal(self.new_game_screen, 'quit', self.__quit)
+        urwid.connect_signal(self.new_game_screen, 'load', self.__load_save)
 
         urwid.connect_signal(self.restart_game_screen, 'restart', self.__restart)
         urwid.connect_signal(self.restart_game_screen, 'go back', self.__show_game_screen)
@@ -38,6 +39,9 @@ class GameController():
 
     def __show_game_screen(self, object):
         self.loop.widget = self.game_screen
+
+    def __load_save(self):
+        ...
 
 
 if __name__ == "__main__":

@@ -1,0 +1,13 @@
+[
+{
+    "in_progress": "True",
+    "player": {
+        "name": "Player",
+        "stats": {
+            "charisma": 20
+        }
+    },
+    "location_id": 1,
+    "situation_id": "None"
+}
+]
