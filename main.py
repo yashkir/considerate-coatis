@@ -56,7 +56,6 @@ class GameController():
         self.loop.widget = self.new_game_screen
 
     def __show_game_screen(self, signal_emitter=None):
-        self.player.draw_stats()
         self.loop.widget = self.game_screen
 
     def __show_restart_screen(self, signal_emitter=None):
@@ -68,3 +67,4 @@ class GameController():
 
 if __name__ == "__main__":
     g = GameController()
+    print(g.player.stats.charisma)
