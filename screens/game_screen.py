@@ -39,7 +39,9 @@ class GameScreen(urwid.LineBox):
         for r in range(len(response_list)):
             list_buttons.append((
                 urwid.Filler(
-                    urwid.Button(str(response_list[r]), self.__choice), 'top',), ('weight', 1, False)))
+                    urwid.Button(
+                        str(response_list[r]),
+                        self.__choice), 'middle',), ('weight', 1, False)))
         final_buttons = urwid.MonitoredFocusList(list_buttons, focus=0)
 
         self.button_columns._set_contents(final_buttons)

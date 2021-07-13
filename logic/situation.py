@@ -23,3 +23,7 @@ class Situation:
     def get_option_stats(self, index) -> dict:
         """Returns the stats for an option given its index"""
         return self.options[index]['stats']
+
+    def get_option_stats_str(self, index) -> dict:
+        """Returns the option stats as a string"""
+        return str(self.options[index]['stats'])
