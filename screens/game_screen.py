@@ -1,4 +1,5 @@
 import urwid
+from urwid.widget import CENTER
 
 
 class GameScreen(urwid.LineBox):
@@ -9,7 +10,7 @@ class GameScreen(urwid.LineBox):
         self.fill = urwid.Filler(self.text, 'top')
         self.player = player
         self.situation_manager = situation_manager
-        self.situation_text = urwid.Text(self.situation_manager.current_situation.get_prompt())
+        self.situation_text = urwid.Text(self.situation_manager.current_situation.get_prompt(), align=CENTER)
         self.stats_box = urwid.LineBox(urwid.Filler(self.player.stats.stat_list_text, 'middle'), title="stats")
         self.location_box = urwid.LineBox(self.fill, title="location")
         self.event_box = urwid.LineBox(urwid.Filler(self.situation_text, 'middle'), title="event")
@@ -22,8 +23,8 @@ class GameScreen(urwid.LineBox):
         self.button_box = urwid.LineBox(self.button_columns, title="buttons")
         self.choice_count = 0
         # Arrange a pile with two columns on top and events on bottom
-        self.top_columns = urwid.Columns([('weight', 3, self.location_box), self.stats_box])
-        self.pile = urwid.Pile([('weight', 3, self.top_columns), ('weight', 1.5, self.event_box), self.button_box])
+        self.top_columns = urwid.Columns([('weight', 1, self.location_box), self.stats_box])
+        self.pile = urwid.Pile([('weight', 2, self.top_columns), ('weight', 1.5, self.event_box), self.button_box])
         super().__init__(self.pile, title="Game Screen")
 
     def update_text(self):
@@ -55,8 +56,8 @@ class GameScreen(urwid.LineBox):
         key = super().keypress(size, key)
         if str(key).lower() == 'r':
             self.text.set_text("random")
-            self.player.stats.charisma += 1
             self.situation_manager.load_situation()
+            self.update_buttons(self.situation_manager.current_situation.get_option_response())
             self.update_text()
 
         if str(key).lower() == 'q':
