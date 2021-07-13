@@ -15,7 +15,10 @@ class Situation:
 
     def get_option_response(self, index) -> str:
         """Returns the response for an option given its index"""
-        return self.options[index]['response']
+        o_list = []
+        for x in range(len(self.options)):
+            o_list.append(self.options[x]['response'])
+        return o_list
 
     def get_option_stats(self, index) -> dict:
         """Returns the stats for an option given its index"""

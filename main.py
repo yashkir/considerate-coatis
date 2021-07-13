@@ -37,12 +37,17 @@ class GameController():
 
         urwid.connect_signal(self.game_screen, 'quit', self.__quit)
         urwid.connect_signal(self.game_screen, 'restart', self.__show_restart_screen)
+        urwid.connect_signal(self.game_screen, 'choice', self.__consequence)
 
         self.loop.run()
 
     def __start(self, signal_emitter=None):
         self.state_manager.reset()
+        self.game_screen.update_buttons(['test', 'test2'])
         self.__show_game_screen()
+
+    def __consequence(self, signal_emitter=None):
+        self.state_manager.apply_stats()
 
     def __quit(self, signal_emitter=None):
         raise urwid.ExitMainLoop()
@@ -71,5 +76,5 @@ class GameController():
 
 if __name__ == "__main__":
     g = GameController()
-    f = g.state_manager.state
-    print(f[0]['player']['stats']['athletic ability'])
+    print(g.state_manager.stats['athletic'])
+    # print(g.game_screen.button_columns.contents)

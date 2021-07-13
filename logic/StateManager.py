@@ -47,6 +47,14 @@ class StateManager():
         cur_stats.wisdom = self.state[0]['player']['stats']['wisdom']
         self.player.stats.update_text()
 
+    def apply_stats(self):
+        """Where the stats will be applied"""
+        self.stats = self.game.situation_manager.current_situation.get_option_stats(self.game.game_screen.choice_count)
+        cur_stats = self.player.stats
+        cur_stats.athletic_ability += self.stats['athletic']
+        self.player.stats.update_text()
+        ...
+
 
 if __name__ == "__main__":
     print("Testing StateManager...")

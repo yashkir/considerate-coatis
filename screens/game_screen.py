@@ -20,9 +20,9 @@ class GameScreen(urwid.LineBox):
         self.button_columns = urwid.Columns([
             urwid.Filler(self.button_one, 'top'), urwid.Filler(self.button_two, 'top')])
         self.button_box = urwid.LineBox(self.button_columns, title="buttons")
-
+        self.choice_count = 0
         # Arrange a pile with two columns on top and events on bottom
-        self.top_columns = urwid.Columns([('weight', 3.5, self.location_box), self.stats_box])
+        self.top_columns = urwid.Columns([('weight', 3, self.location_box), self.stats_box])
         self.pile = urwid.Pile([('weight', 3, self.top_columns), ('weight', 1.5, self.event_box), self.button_box])
         super().__init__(self.pile, title="Game Screen")
 
@@ -30,6 +30,23 @@ class GameScreen(urwid.LineBox):
         """Where all the text will be updated"""
         self.situation_text.set_text(self.situation_manager.current_situation.get_prompt())
         self.player.stats.update_text()
+
+    def update_buttons(self, response_list):
+        """Where the buttons will be updated"""
+        list_buttons = []
+        list_buttons.append((urwid.Filler(self.button_one, 'top'), ('weight', 1, False)))
+        list_buttons.append((urwid.Filler(self.button_two, 'top'), ('weight', 1, False)))
+        for r in range(len(response_list)):
+            list_buttons.append((
+                urwid.Filler(
+                    urwid.Button(str(response_list[r]), self.__choice(r)), 'top',), ('weight', 1, False)))
+        final_buttons = urwid.MonitoredFocusList(list_buttons, focus=0)
+
+        self.button_columns._set_contents(final_buttons)
+
+    def __choice(self, choice, object=None):
+        self._emit('choice')
+        self.choice_count = choice
 
     def keypress(self, size, key):
         """Handle q for quitting"""
@@ -44,4 +61,4 @@ class GameScreen(urwid.LineBox):
             raise urwid.ExitMainLoop()
 
 
-urwid.register_signal(GameScreen, ['quit', 'restart'])
+urwid.register_signal(GameScreen, ['quit', 'restart', 'choice'])
