@@ -4,13 +4,15 @@ import urwid
 class GameScreen(urwid.LineBox):
     """Main game screen."""
 
-    def __init__(self, player):
+    def __init__(self, player, situation_manager):
         self.text = urwid.Text("placeholder")
         self.fill = urwid.Filler(self.text, 'top')
         self.player = player
+        self.situation_manager = situation_manager
+        self.situation_text = urwid.Text(self.situation_manager.current_situation.get_prompt())
         self.stats_box = urwid.LineBox(urwid.Filler(self.player.stats.stat_list_text, 'middle'), title="stats")
         self.location_box = urwid.LineBox(self.fill, title="location")
-        self.event_box = urwid.LineBox(self.fill, title="event")
+        self.event_box = urwid.LineBox(urwid.Filler(self.situation_text, 'middle'), title="event")
 
         # buttons
         self.button_one = urwid.Button("quit", lambda _: self._emit('quit'))
@@ -31,6 +33,9 @@ class GameScreen(urwid.LineBox):
             self.text.set_text("random")
             self.player.stats.charisma += 1
             self.player.stats.update_text()
+            self.situation_manager.load_situation()
+            self.situation_text.set_text(self.situation_manager.current_situation.get_prompt())
+
         if str(key).lower() == 'q':
             raise urwid.ExitMainLoop()
 

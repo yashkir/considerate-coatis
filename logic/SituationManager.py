@@ -1,7 +1,7 @@
 import json
 import random
 
-from situation import Situation
+from logic.situation import Situation
 
 
 class SituationManager():

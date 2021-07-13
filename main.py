@@ -1,5 +1,6 @@
 import urwid
 
+from logic.SituationManager import SituationManager
 # from logic.player import Player, Stats
 from logic.StateManager import StateManager
 from screens.game_screen import GameScreen
@@ -13,11 +14,13 @@ class GameController():
 
     def __init__(self):
 
+        self.situation_manager = SituationManager()
+        self.situation_manager.load_situation()
         self.new_game_screen = NewGameScreen()
         self.restart_game_screen = RestartGameScreen()
         self.state_manager_screen = StateManagerScreen()
         self.state_manager = StateManager()
-        self.game_screen = GameScreen(self.state_manager.player)
+        self.game_screen = GameScreen(self.state_manager.player, self.situation_manager)
 
         self.loop = urwid.MainLoop(self.new_game_screen)
 
@@ -38,16 +41,17 @@ class GameController():
         self.loop.run()
 
     def __start(self, signal_emitter=None):
+        self.state_manager.player.stats.reset()
+        self.state_manager.player.stats.update_text()
         self.state_manager.load_initial_state()
+        self.situation_manager.load_situation()
         self.__show_game_screen()
 
     def __quit(self, signal_emitter=None):
         raise urwid.ExitMainLoop()
 
     def __restart(self, signal_emitter=None):
-        self.state_manager.player.stats.reset()
-        self.state_manager.player.stats.update_text()
-        self.loop.widget = self.new_game_screen
+        self.__start()
 
     def __load_save(self, signal_emitter=None):
         self.state_manager.load_state(self.state_manager_screen.chosen_save)
