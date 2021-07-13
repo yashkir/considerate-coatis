@@ -24,3 +24,6 @@
 ### About
 You play as an alien trying to fit in to a human highschool. With only 5 days left until graduation can you avoid suspicion
 long enough to leave highschool?
+
+### Gameplay Elements
+![GE-Location](https://raw.githubusercontent.com/yashkir/considerate-coatis/blob/main/src/about-location.png)
