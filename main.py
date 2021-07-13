@@ -42,8 +42,8 @@ class GameController():
         self.loop.run()
 
     def __start(self, signal_emitter=None):
-        self.state_manager.reset()
-        self.game_screen.update_buttons(['test', 'test2'])
+        # self.state_manager.reset()
+        self.game_screen.update_buttons(self.situation_manager.current_situation.get_option_response())
         self.__show_game_screen()
 
     def __consequence(self, signal_emitter=None):
@@ -54,12 +54,12 @@ class GameController():
 
     def __restart(self, signal_emitter=None):
         self.loop.widget = self.new_game_screen
-        self.__start()
+        self.state_manager.reset()
 
     def __load_save(self, signal_emitter=None):
         self.state_manager.load_state(self.state_manager_screen.chosen_save)
         self.state_manager.set_state()
-        self.__show_game_screen()
+        self.__start()
 
     def __show_new_game_screen(self, signal_emitter=None):
         self.loop.widget = self.new_game_screen
@@ -76,5 +76,5 @@ class GameController():
 
 if __name__ == "__main__":
     g = GameController()
-    print(g.state_manager.stats['athletic'])
+    # print(g.state_manager.stats)
     # print(g.game_screen.button_columns.contents)

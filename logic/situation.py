@@ -13,7 +13,7 @@ class Situation:
         """Returns the number of options"""
         return len(self.options)
 
-    def get_option_response(self, index) -> str:
+    def get_option_response(self) -> str:
         """Returns the response for an option given its index"""
         o_list = []
         for x in range(len(self.options)):

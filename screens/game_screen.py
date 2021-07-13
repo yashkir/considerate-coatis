@@ -39,14 +39,14 @@ class GameScreen(urwid.LineBox):
         for r in range(len(response_list)):
             list_buttons.append((
                 urwid.Filler(
-                    urwid.Button(str(response_list[r]), self.__choice(r)), 'top',), ('weight', 1, False)))
+                    urwid.Button(str(response_list[r]), self.__choice), 'top',), ('weight', 1, False)))
         final_buttons = urwid.MonitoredFocusList(list_buttons, focus=0)
 
         self.button_columns._set_contents(final_buttons)
 
-    def __choice(self, choice, object=None):
+    def __choice(self, object):
+        self.choice_count = object.get_label()
         self._emit('choice')
-        self.choice_count = choice
 
     def keypress(self, size, key):
         """Handle q for quitting"""
