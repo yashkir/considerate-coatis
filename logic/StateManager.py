@@ -9,9 +9,10 @@ INITIAL_STATE_PATH = os.path.join("logic", "initial_state.json")
 class StateManager():
     """Exposes functionality for managing game state."""
 
-    def __init__(self):
+    def __init__(self, game):
         self.state = {}
         self.player = Player(Stats(50, 50, 50, 50), 1, 1)
+        self.game = game
 
     def load_initial_state(self):
         """Generate a initial state for a new game."""
@@ -28,6 +29,14 @@ class StateManager():
         file = open(path, mode='r')
         self.state = json.load(file)
         file.close()
+
+    def reset(self):
+        """Reset everything"""
+        self.game.situation_manager.reset()
+        self.player.stats.reset()
+        self.game.state_manager.load_initial_state()
+        self.game.situation_manager.load_situation()
+        self.game.game_screen.update_text()
 
 
 if __name__ == "__main__":

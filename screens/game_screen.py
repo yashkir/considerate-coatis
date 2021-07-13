@@ -26,15 +26,19 @@ class GameScreen(urwid.LineBox):
         self.pile = urwid.Pile([('weight', 3, self.top_columns), ('weight', 1.5, self.event_box), self.button_box])
         super().__init__(self.pile, title="Game Screen")
 
+    def update_text(self):
+        """Where all the text will be updated"""
+        self.situation_text.set_text(self.situation_manager.current_situation.get_prompt())
+        self.player.stats.update_text()
+
     def keypress(self, size, key):
         """Handle q for quitting"""
         key = super().keypress(size, key)
         if str(key).lower() == 'r':
             self.text.set_text("random")
             self.player.stats.charisma += 1
-            self.player.stats.update_text()
             self.situation_manager.load_situation()
-            self.situation_text.set_text(self.situation_manager.current_situation.get_prompt())
+            self.update_text()
 
         if str(key).lower() == 'q':
             raise urwid.ExitMainLoop()

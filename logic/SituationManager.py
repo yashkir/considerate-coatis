@@ -37,6 +37,11 @@ class SituationManager():
         """Returns the current situation"""
         return self.current_situation
 
+    def reset(self):
+        """Resets everything"""
+        self.current_situation = None
+        self.situation_counter = 0
+
 
 if __name__ == "__main__":
     sm = SituationManager()

@@ -31,6 +31,7 @@ class Stats:
         self.charisma = 50
         self.wisdom = 50
         self.smartness = 50
+        self.update_text()
 
 
 class Player:
