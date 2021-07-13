@@ -10,19 +10,19 @@ class Stats:
         self.wisdom = wisdom
         self.smartness = smartness
         self.stat_list = [self.athletic_ability, self.charisma, self.wisdom, self.smartness]
-        self.stat_list_text = urwid.Filler(urwid.Text(
+        self.stat_list_text = urwid.Text(
             "strength: " + str(self.athletic_ability)+'\n'
             "charisma: " + str(self.charisma)+'\n'
             "wisdom: " + str(self.wisdom) + '\n'
-            "smartness: " + str(self.smartness) + '\n',), 'middle')
+            "smartness: " + str(self.smartness) + '\n')
+        self.stat_list_filler = urwid.Filler(self.stat_list_text, 'middle')
 
-    def update_stats(self):
-        """This is where the stats will be updated"""
-        self.stat_list_text = urwid.Filler(urwid.Text(
-            "strength: " + str(self.athletic_ability)+'\n'
-            "charisma: " + str(self.charisma)+'\n'
-            "wisdom: " + str(self.wisdom) + '\n'
-            "smartness: " + str(self.smartness) + '\n',), 'middle')
+    def update_text(self):
+        """This is where the text will update"""
+        stat_list_text = (
+            "strength: " + str(self.athletic_ability)+'\n'+"charisma: " + str(self.charisma) + '\n'
+            + "wisdom: " + str(self.wisdom) + '\n' + "smartness: " + str(self.smartness) + '\n')
+        return stat_list_text
 
     def reset(self):
         """Resets stats"""
