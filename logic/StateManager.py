@@ -38,6 +38,15 @@ class StateManager():
         self.game.situation_manager.load_situation()
         self.game.game_screen.update_text()
 
+    def set_state(self):
+        """Sets the player state to the state that is loaded"""
+        cur_stats = self.player.stats
+        cur_stats.athletic_ability = self.state[0]['player']['stats']['athletic ability']
+        cur_stats.charisma = self.state[0]['player']['stats']['charisma']
+        cur_stats.smartness = self.state[0]['player']['stats']['smartness']
+        cur_stats.wisdom = self.state[0]['player']['stats']['wisdom']
+        self.player.stats.update_text()
+
 
 if __name__ == "__main__":
     print("Testing StateManager...")

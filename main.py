@@ -48,10 +48,12 @@ class GameController():
         raise urwid.ExitMainLoop()
 
     def __restart(self, signal_emitter=None):
+        self.loop.widget = self.new_game_screen
         self.__start()
 
     def __load_save(self, signal_emitter=None):
         self.state_manager.load_state(self.state_manager_screen.chosen_save)
+        self.state_manager.set_state()
         self.__show_game_screen()
 
     def __show_new_game_screen(self, signal_emitter=None):
@@ -69,3 +71,5 @@ class GameController():
 
 if __name__ == "__main__":
     g = GameController()
+    f = g.state_manager.state
+    print(f[0]['player']['stats']['athletic ability'])
