@@ -46,6 +46,8 @@ class GameController():
         raise urwid.ExitMainLoop()
 
     def __restart(self, signal_emitter=None):
+        self.player.stats.reset()
+        self.game_screen.update()
         self.loop.widget = self.new_game_screen
 
     def __load_save(self, signal_emitter=None):

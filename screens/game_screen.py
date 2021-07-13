@@ -31,7 +31,7 @@ class GameScreen(urwid.LineBox):
         super().__init__(self.pile, title="Game Screen")
         # self.update()
 
-    def __update(self):
+    def update(self):
         """The update variable to update everything on the screen at will"""
         # The main boxes
         self.stats_box = urwid.LineBox(self.player.stats.stat_list_text, title="stats")
@@ -61,7 +61,7 @@ class GameScreen(urwid.LineBox):
             self.text.set_text("random")
             self.player.stats.charisma += 1
             self.player.stats.update_stats()
-            self.__update()
+            self.update()
         if str(key).lower() == 'q':
             raise urwid.ExitMainLoop()
 

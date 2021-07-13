@@ -24,6 +24,14 @@ class Stats:
             "wisdom: " + str(self.wisdom) + '\n'
             "smartness: " + str(self.smartness) + '\n',), 'middle')
 
+    def reset(self):
+        """Resets stats"""
+        self.athletic_ability = 50
+        self.charisma = 50
+        self.wisdom = 50
+        self.smartness = 50
+        self.update_stats()
+
 
 class Player:
     """The player class"""
