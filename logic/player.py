@@ -22,6 +22,7 @@ class Stats:
         stat_list_text = (
             "strength: " + str(self.athletic_ability)+'\n'+"charisma: " + str(self.charisma) + '\n'
             + "wisdom: " + str(self.wisdom) + '\n' + "smartness: " + str(self.smartness) + '\n')
+        self.stat_list_text.set_text(stat_list_text)
         return stat_list_text
 
     def reset(self):
@@ -30,7 +31,6 @@ class Stats:
         self.charisma = 50
         self.wisdom = 50
         self.smartness = 50
-        self.update_stats()
 
 
 class Player:

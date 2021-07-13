@@ -30,7 +30,7 @@ class GameScreen(urwid.LineBox):
         if str(key).lower() == 'r':
             self.text.set_text("random")
             self.player.stats.charisma += 1
-            self.player.stats.stat_list_text.set_text(self.player.stats.update_text())
+            self.player.stats.update_text()
         if str(key).lower() == 'q':
             raise urwid.ExitMainLoop()
 

@@ -1,6 +1,6 @@
 import urwid
 
-from logic.player import Player, Stats
+# from logic.player import Player, Stats
 from logic.StateManager import StateManager
 from screens.game_screen import GameScreen
 from screens.new_game_screen import NewGameScreen
@@ -12,13 +12,12 @@ class GameController():
     """Shows a new game prompt and switches to the game screen or quits."""
 
     def __init__(self):
-        self.player = Player(Stats(50, 50, 50, 50), 1, 1)
 
         self.new_game_screen = NewGameScreen()
         self.restart_game_screen = RestartGameScreen()
         self.state_manager_screen = StateManagerScreen()
-        self.game_screen = GameScreen(self.player)
         self.state_manager = StateManager()
+        self.game_screen = GameScreen(self.state_manager.player)
 
         self.loop = urwid.MainLoop(self.new_game_screen)
 
@@ -46,8 +45,8 @@ class GameController():
         raise urwid.ExitMainLoop()
 
     def __restart(self, signal_emitter=None):
-        self.player.stats.reset()
-        self.game_screen.update()
+        self.state_manager.player.stats.reset()
+        self.state_manager.player.stats.update_text()
         self.loop.widget = self.new_game_screen
 
     def __load_save(self, signal_emitter=None):

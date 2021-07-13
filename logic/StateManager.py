@@ -1,6 +1,8 @@
 import json
 import os
 
+from logic.player import Player, Stats
+
 INITIAL_STATE_PATH = os.path.join("logic", "initial_state.json")
 
 
@@ -9,6 +11,7 @@ class StateManager():
 
     def __init__(self):
         self.state = {}
+        self.player = Player(Stats(50, 50, 50, 50), 1, 1)
 
     def load_initial_state(self):
         """Generate a initial state for a new game."""
