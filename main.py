@@ -2,6 +2,7 @@ import urwid
 
 from logic.StateManager import StateManager
 from screens.game_screen import GameScreen
+from screens.help_screen import HelpScreen
 from screens.new_game_screen import NewGameScreen
 from screens.restart_game_screen import RestartGameScreen
 from screens.state_manager_screen import StateManagerScreen
@@ -11,13 +12,16 @@ class GameController():
     """Shows a new game prompt and switches to the game screen or quits."""
 
     def __init__(self):
+        current_screen = None
+
         self.new_game_screen = NewGameScreen()
         self.restart_game_screen = RestartGameScreen()
         self.state_manager_screen = StateManagerScreen()
         self.game_screen = GameScreen()
         self.state_manager = StateManager()
+        self.help_screen = HelpScreen(current_screen)
 
-        self.loop = urwid.MainLoop(self.new_game_screen)
+        self.loop = urwid.MainLoop(self.new_game_screen, unhandled_input=self.__show_help)
 
         urwid.connect_signal(self.new_game_screen, 'start game', self.__start)
         urwid.connect_signal(self.new_game_screen, 'quit', self.__quit)
@@ -32,6 +36,8 @@ class GameController():
 
         urwid.connect_signal(self.game_screen, 'quit', self.__quit)
         urwid.connect_signal(self.game_screen, 'restart', self.__show_restart_screen)
+
+        current_screen = self.loop.widget
 
         self.loop.run()
 
@@ -60,6 +66,10 @@ class GameController():
 
     def __show_state_manager_screen(self, signal_emitter=None):
         self.loop.widget = self.state_manager_screen
+
+    def __show_help(self, key, signal_emitter=None):
+        if key == 'f12':
+            self.loop.widget = self.help_screen
 
 
 if __name__ == "__main__":
