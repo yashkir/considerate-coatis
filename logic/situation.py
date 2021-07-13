@@ -1,6 +1,3 @@
-import json
-
-
 class Situation:
     """Situation class"""
 
@@ -15,12 +12,3 @@ class Situation:
     def get_options(self) -> dict:
         """Returns the situation's options"""
         return self.options
-
-    @classmethod
-    def from_index(cls, index: int):
-        """Returns a Situation object built from situations.json at index"""
-        with open('situations.json', 'r') as file:
-            data = json.load(file)
-
-        situation = cls(**data[index])
-        return situation
