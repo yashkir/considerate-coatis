@@ -40,6 +40,3 @@ class Player:
 
     def __init__(self, stats, x, y):
         self.stats = stats
-        self.x = x
-        self.y = y
-        # self.stats_fill = urwid.Filler(self.stats.stat_list_text, 'top')
