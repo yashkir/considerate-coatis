@@ -1,4 +1,5 @@
 import urwid
+from urwid.widget import CENTER
 
 
 class Stats:
@@ -14,7 +15,7 @@ class Stats:
             "strength: " + str(self.athletic_ability)+'\n'
             "charisma: " + str(self.charisma)+'\n'
             "wisdom: " + str(self.wisdom) + '\n'
-            "smartness: " + str(self.smartness) + '\n')
+            "smartness: " + str(self.smartness) + '\n', align=CENTER)
         self.stat_list_filler = urwid.Filler(self.stat_list_text, 'middle')
 
     def update_text(self):
