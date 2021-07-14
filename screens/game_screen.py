@@ -18,16 +18,18 @@ class GameScreen(urwid.LineBox):
         self.event_box = urwid.LineBox(urwid.Filler(self.situation_text, 'middle'), title="event")
 
         # buttons
+        self.button_width = 20
         self.button_one = urwid.Button("quit", lambda _: self._emit('quit'))
         self.button_two = urwid.Button("Restart", lambda _: self._emit('restart'))
-        self.button_columns = urwid.Columns([
-            urwid.Filler(self.button_one, 'top'), urwid.Filler(self.button_two, 'top')])
+        self.button_columns = urwid.Filler(
+            urwid.GridFlow([self.button_one, self.button_two], self.button_width, 2, 1, 'center'))
         self.button_box = urwid.LineBox(self.button_columns, title="buttons")
         self.choice_count = 0
 
         # Arrange a pile with two columns on top and events on bottom
         self.top_columns = urwid.Columns([('weight', 1, self.location_box), self.stats_box])
-        self.pile = urwid.Pile([('weight', 2, self.top_columns), ('weight', 1.5, self.event_box), self.button_box])
+        self.pile = urwid.Pile([
+            ('weight', 1.5, self.top_columns), ('weight', 2, self.event_box), ('weight', 3, self.button_box)])
         super().__init__(self.pile, title="Game Screen")
 
     def update_text(self):
@@ -37,19 +39,20 @@ class GameScreen(urwid.LineBox):
 
     def update_buttons(self, response_list):
         """Where the buttons will be updated"""
+        self.button_columns.base_widget._set_focus_position(0)
         list_buttons = []
-        list_buttons.append((urwid.Filler(self.button_one, 'top'), ('weight', 1, False)))
-        list_buttons.append((urwid.Filler(self.button_two, 'top'), ('weight', 1, False)))
 
         for r in range(len(response_list)):
             list_buttons.append((
-                urwid.Filler(
-                    urwid.Button(
-                        str(response_list[r]), self.__choice), 'middle',), ('weight', 1, False)))
+                urwid.Button(
+                    str(r+1) + ' ' + str(response_list[r])
+                    + self.situation_manager.current_situation.get_option_stats_str(r),
+                    self.__choice), ('given', self.button_width)))
 
-        final_buttons = urwid.MonitoredFocusList(list_buttons, focus=0)
+        list_buttons.append((self.button_one, ('given', self.button_width)))
+        list_buttons.append((self.button_two, ('given', self.button_width)))
 
-        self.button_columns._set_contents(final_buttons)
+        self.button_columns.base_widget.contents = list_buttons
 
     def keypress(self, size, key):
         """Handle q for quitting and Keypress to get to Help Screen"""

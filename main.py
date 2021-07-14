@@ -55,6 +55,7 @@ class GameController():
         self.__show_game_screen()
 
     def __consequence(self, signal_emitter=None, choice=""):
+        self.game_screen.button_columns.base_widget._set_focus_position(0)
         self.state_manager.apply_stats(choice)
 
     def __quit(self, signal_emitter=None):
