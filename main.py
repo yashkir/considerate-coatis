@@ -1,7 +1,6 @@
 import urwid
 
 from logic.SituationManager import SituationManager
-# from logic.player import Player, Stats
 from logic.StateManager import StateManager
 from screens.game_screen import GameScreen
 from screens.new_game_screen import NewGameScreen
@@ -42,7 +41,6 @@ class GameController():
         self.loop.run()
 
     def __start(self, signal_emitter=None):
-        # self.state_manager.reset()
         self.game_screen.update_buttons(self.situation_manager.current_situation.get_option_response())
         self.__show_game_screen()
 
@@ -76,5 +74,3 @@ class GameController():
 
 if __name__ == "__main__":
     g = GameController()
-    # print(g.state_manager.stats)
-    # print(g.game_screen.button_columns.contents)

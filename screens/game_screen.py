@@ -51,17 +51,5 @@ class GameScreen(urwid.LineBox):
         self.choice_count = object.get_label()
         self._emit('choice')
 
-    def keypress(self, size, key):
-        """Handle q for quitting"""
-        key = super().keypress(size, key)
-        if str(key).lower() == 'r':
-            self.text.set_text("random")
-            self.situation_manager.load_situation()
-            self.update_buttons(self.situation_manager.current_situation.get_option_response())
-            self.update_text()
-
-        if str(key).lower() == 'q':
-            raise urwid.ExitMainLoop()
-
 
 urwid.register_signal(GameScreen, ['quit', 'restart', 'choice'])

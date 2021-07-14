@@ -64,7 +64,6 @@ class StateManager():
         self.game.game_screen.update_text()
         self.game.game_screen.update_buttons(self.game.situation_manager.current_situation.get_option_response())
         self.player.stats.update_text()
-        ...
 
 
 if __name__ == "__main__":
