@@ -12,32 +12,36 @@ class GameController():
     """Shows a new game prompt and switches to the game screen or quits."""
 
     def __init__(self):
-        current_screen = None
 
         self.new_game_screen = NewGameScreen()
         self.restart_game_screen = RestartGameScreen()
         self.state_manager_screen = StateManagerScreen()
         self.game_screen = GameScreen()
         self.state_manager = StateManager()
-        self.help_screen = HelpScreen(current_screen)
+        self.help_screen = HelpScreen()
 
-        self.loop = urwid.MainLoop(self.new_game_screen, unhandled_input=self.__show_help)
+        self.loop = urwid.MainLoop(self.new_game_screen)
 
         urwid.connect_signal(self.new_game_screen, 'start game', self.__start)
         urwid.connect_signal(self.new_game_screen, 'quit', self.__quit)
         urwid.connect_signal(self.new_game_screen, 'load', self.__show_state_manager_screen)
+        urwid.connect_signal(self.new_game_screen, 'help', self.__show_help_screen)
 
         urwid.connect_signal(self.restart_game_screen, 'restart', self.__restart)
         urwid.connect_signal(self.restart_game_screen, 'go back', self.__show_game_screen)
         urwid.connect_signal(self.restart_game_screen, 'quit', self.__quit)
+        urwid.connect_signal(self.restart_game_screen, 'help', self.__show_help_screen)
 
         urwid.connect_signal(self.state_manager_screen, 'back', self.__show_new_game_screen)
         urwid.connect_signal(self.state_manager_screen, 'load save', self.__load_save)
 
         urwid.connect_signal(self.game_screen, 'quit', self.__quit)
         urwid.connect_signal(self.game_screen, 'restart', self.__show_restart_screen)
+        urwid.connect_signal(self.game_screen, 'help', self.__show_help_screen)
 
-        current_screen = self.loop.widget
+        urwid.connect_signal(self.help_screen, 'prev', self.__show_prev_screen)
+
+        self.prev = self.loop.widget
 
         self.loop.run()
 
@@ -67,9 +71,12 @@ class GameController():
     def __show_state_manager_screen(self, signal_emitter=None):
         self.loop.widget = self.state_manager_screen
 
-    def __show_help(self, key, signal_emitter=None):
-        if key == 'f12':
-            self.loop.widget = self.help_screen
+    def __show_help_screen(self, signal_emitter=None):
+        self.prev = self.loop.widget
+        self.loop.widget = self.help_screen
+
+    def __show_prev_screen(self, signal_emitter=None):
+        self.loop.widget = self.prev
 
 
 if __name__ == "__main__":

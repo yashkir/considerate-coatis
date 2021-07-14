@@ -28,12 +28,15 @@ class GameScreen(urwid.LineBox):
         super().__init__(pile, title="Game Screen")
 
     def keypress(self, size, key):
-        """Handle q for quitting"""
+        """Handle q for quitting and Keypress to get to Help Screen"""
         key = super().keypress(size, key)
+        print(key)
         if str(key).lower() == 'r':
             self.text.set_text("random")
         if str(key).lower() == 'q':
             raise urwid.ExitMainLoop()
+        if str(key).lower() == 'h':
+            self._emit('help')
 
 
-urwid.register_signal(GameScreen, ['quit', 'restart'])
+urwid.register_signal(GameScreen, ['quit', 'restart', 'help'])
