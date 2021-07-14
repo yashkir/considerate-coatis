@@ -52,7 +52,7 @@ class StateManager():
         # TODO still more pork to cut here
         responses = self.game.situation_manager.current_situation.get_option_response()
         for r in range(len(responses)):
-            if response == responses[r]:
+            if int(response[0])-1 == r:
                 chosen_response = r
 
         self.stats = self.game.situation_manager.current_situation.get_option_stats(chosen_response)
