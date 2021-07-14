@@ -52,7 +52,6 @@ class GameScreen(urwid.LineBox):
         list_buttons.append((self.button_one, ('given', self.button_width)))
         list_buttons.append((self.button_two, ('given', self.button_width)))
 
-        # final_buttons = urwid.MonitoredFocusList(list_buttons, focus=0)
         self.button_columns.base_widget.contents = list_buttons
 
     def keypress(self, size, key):
