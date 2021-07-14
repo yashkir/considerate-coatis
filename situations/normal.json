@@ -1,0 +1,86 @@
+[
+    {
+        "prompt": "You can either study for the upcoming test, or rest for the upcoming race.",
+        "options": [
+            {
+                "response": "I will study for the test.",
+                "stats": {
+                    "social": -10,
+                    "athletic": -10,
+                    "academic": 10
+                }
+            },
+            {
+                "response": "I will rest for the race.",
+                "stats": {
+                    "social": 10,
+                    "athletic": 5,
+                    "academic": -5
+                }
+            }
+        ]
+    },
+    {
+        "prompt": "you are invited to play dnd with the nerds but also invited to play football with the jocks, which one do you chose?",
+        "options": [
+            {
+                "response": "nerds",
+                "stats": {
+                    "social": -10,
+                    "athletic": -10,
+                    "academic": 10
+                }
+            },
+            {
+                "response": "jocks",
+                "stats": {
+                    "social": 10,
+                    "athletic": 10,
+                    "academic": -10
+                }
+            }
+        ]
+    },
+    {
+        "prompt": "The popular kids invite you to a party but you have a test tomorrow",
+        "options": [
+            {
+                "response": "go to the party",
+                "stats": {
+                    "social": 10,
+                    "athletic": 4,
+                    "academic": -10
+                }
+            },
+            {
+                "response": "study",
+                "stats": {
+                    "social": -7,
+                    "athletic": -4,
+                    "academic": 10
+                }
+            }
+        ]
+    },
+    {
+        "prompt": "a girl asks you out and you declined it now the girl is sad, what do you do?",
+        "options": [
+            {
+                "response": "make her feel better",
+                "stats": {
+                    "social": 10,
+                    "athletic": -4,
+                    "academic": -8
+                }
+            },
+            {
+                "response": "ignore it",
+                "stats": {
+                    "social": -10,
+                    "athletic": 0,
+                    "academic": 0
+                }
+            }
+        ]
+    }
+]

@@ -1,5 +1,6 @@
 import urwid
 
+from logic.SituationManager import SituationManager
 from logic.StateManager import StateManager
 from screens.game_screen import GameScreen
 from screens.help_screen import HelpScreen
@@ -19,6 +20,13 @@ class GameController():
         self.game_screen = GameScreen()
         self.state_manager = StateManager()
         self.help_screen = HelpScreen()
+        self.situation_manager = SituationManager()
+        self.situation_manager.load_situation()
+        self.new_game_screen = NewGameScreen()
+        self.restart_game_screen = RestartGameScreen()
+        self.state_manager_screen = StateManagerScreen()
+        self.state_manager = StateManager(self)
+        self.game_screen = GameScreen(self.state_manager, self.situation_manager)
 
         self.loop = urwid.MainLoop(self.new_game_screen)
 
@@ -41,23 +49,30 @@ class GameController():
 
         urwid.connect_signal(self.help_screen, 'prev', self.__show_prev_screen)
 
+        urwid.connect_signal(self.game_screen, 'choice', self.__consequence)
+
         self.prev = self.loop.widget
 
         self.loop.run()
 
     def __start(self, signal_emitter=None):
-        self.state_manager.load_initial_state()
+        self.game_screen.update_buttons(self.situation_manager.current_situation.get_option_response())
         self.__show_game_screen()
+
+    def __consequence(self, signal_emitter=None, choice=""):
+        self.state_manager.apply_stats(choice)
 
     def __quit(self, signal_emitter=None):
         raise urwid.ExitMainLoop()
 
     def __restart(self, signal_emitter=None):
         self.loop.widget = self.new_game_screen
+        self.state_manager.reset()
 
-    def __load_save(self, signal_emitter=None):
-        self.state_manager.load_state(self.state_manager_screen.chosen_save)
-        self.__show_game_screen()
+    def __load_save(self, signal_emitter=None, chosen_save=""):
+        self.state_manager.load_state(chosen_save)
+        self.state_manager.set_state()
+        self.__start()
 
     def __show_new_game_screen(self, signal_emitter=None):
         self.loop.widget = self.new_game_screen

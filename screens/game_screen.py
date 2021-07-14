@@ -1,31 +1,55 @@
 import urwid
+from urwid.widget import CENTER
 
 
 class GameScreen(urwid.LineBox):
     """Main game screen."""
 
-    def __init__(self):
-        self.text = urwid.Text("placeholder")
-        fill = urwid.Filler(self.text, 'top')
+    def __init__(self, state_manager, situation_manager):
+        self.state_manager = state_manager
+        self.situation_manager = situation_manager
 
-        # The main boxes
-        location_box = urwid.LineBox(fill, title="location")
-        stats_box = urwid.LineBox(fill, title="stats")
-        event_box = urwid.LineBox(fill, title="event")
+        self.text = urwid.Text("placeholder")
+        self.fill = urwid.Filler(self.text, 'top')
+        self.stats_box = urwid.LineBox(
+            urwid.Filler(self.state_manager.player.stats.stat_list_text, 'middle'), title="stats")
+        self.location_box = urwid.LineBox(self.fill, title="location")
+        self.situation_text = urwid.Text(self.situation_manager.current_situation.get_prompt(), align=CENTER)
+        self.event_box = urwid.LineBox(urwid.Filler(self.situation_text, 'middle'), title="event")
 
         # buttons
-        button_one = urwid.Button("quit", lambda _: self._emit('quit'))
-        button_two = urwid.Button("Restart", lambda _: self._emit('restart'))
-        button_columns = urwid.Columns([urwid.Filler(button_one, 'top'), urwid.Filler(button_two, 'top')])
-        button_box = urwid.LineBox(button_columns, title="buttons")
+        self.button_one = urwid.Button("quit", lambda _: self._emit('quit'))
+        self.button_two = urwid.Button("Restart", lambda _: self._emit('restart'))
+        self.button_columns = urwid.Columns([
+            urwid.Filler(self.button_one, 'top'), urwid.Filler(self.button_two, 'top')])
+        self.button_box = urwid.LineBox(self.button_columns, title="buttons")
+        self.choice_count = 0
 
         # Arrange a pile with two columns on top and events on bottom
-        top_columns = urwid.Columns([location_box, stats_box])
-        pile = urwid.Pile([top_columns, event_box, button_box])
+        self.top_columns = urwid.Columns([('weight', 1, self.location_box), self.stats_box])
+        self.pile = urwid.Pile([('weight', 2, self.top_columns), ('weight', 1.5, self.event_box), self.button_box])
+        super().__init__(self.pile, title="Game Screen")
 
-        # Put everything on one box
-        # box = urwid.LineBox(pile, title="Game Screen")
-        super().__init__(pile, title="Game Screen")
+    def update_text(self):
+        """Where all the text will be updated"""
+        self.situation_text.set_text(self.situation_manager.current_situation.get_prompt())
+        self.state_manager.player.stats.update_text()
+
+    def update_buttons(self, response_list):
+        """Where the buttons will be updated"""
+        list_buttons = []
+        list_buttons.append((urwid.Filler(self.button_one, 'top'), ('weight', 1, False)))
+        list_buttons.append((urwid.Filler(self.button_two, 'top'), ('weight', 1, False)))
+
+        for r in range(len(response_list)):
+            list_buttons.append((
+                urwid.Filler(
+                    urwid.Button(
+                        str(response_list[r]), self.__choice), 'middle',), ('weight', 1, False)))
+
+        final_buttons = urwid.MonitoredFocusList(list_buttons, focus=0)
+
+        self.button_columns._set_contents(final_buttons)
 
     def keypress(self, size, key):
         """Handle q for quitting and Keypress to get to Help Screen"""
@@ -38,5 +62,9 @@ class GameScreen(urwid.LineBox):
         if str(key).lower() == 'h':
             self._emit('help')
 
+    def __choice(self, object):
+        choice_text = object.get_label()
+        self._emit('choice', choice_text)
 
-urwid.register_signal(GameScreen, ['quit', 'restart', 'help'])
+
+urwid.register_signal(GameScreen, ['quit', 'restart', 'help', 'choice'])

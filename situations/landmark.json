@@ -1,0 +1,31 @@
+[
+{
+    "prompt": "It is your first day of school! Who will you sit with?",
+    "options": [
+        {
+            "response": "The nerds.",
+            "stats": {
+                "social": -10,
+                "athletic": -5,
+                "academic": 15
+            }
+        },
+        {
+            "response": "The football team.",
+            "stats": {
+                "social": 5,
+                "athletic": 10,
+                "academic": -5
+            }
+        },
+        {
+            "response": "The popular kids",
+            "stats": {
+                "social": 15,
+                "athletic": 0,
+                "academic": 0
+            }
+        }
+    ]
+}
+]

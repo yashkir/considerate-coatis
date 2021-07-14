@@ -5,9 +5,9 @@
             "name": "Player",
             "stats": {
                 "athletic ability": 53,
-                "charisma": 50,
-                "wisdom": 50,
-                "smartness": 50
+                "charisma": 23,
+                "wisdom": 98,
+                "smartness": 70
             }
         },
         "location_id": 1,
