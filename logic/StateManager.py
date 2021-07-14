@@ -47,11 +47,12 @@ class StateManager():
         cur_stats.wisdom = self.state[0]['player']['stats']['wisdom']
         self.player.stats.update_text()
 
-    def apply_stats(self):
+    def apply_stats(self, response):
         """Where the stats will be applied"""
+        # TODO still more pork to cut here
         responses = self.game.situation_manager.current_situation.get_option_response()
         for r in range(len(responses)):
-            if self.game.game_screen.choice_count == responses[r]:
+            if response == responses[r]:
                 chosen_response = r
 
         self.stats = self.game.situation_manager.current_situation.get_option_stats(chosen_response)

@@ -19,7 +19,7 @@ class GameController():
         self.restart_game_screen = RestartGameScreen()
         self.state_manager_screen = StateManagerScreen()
         self.state_manager = StateManager(self)
-        self.game_screen = GameScreen(self.state_manager.player, self.situation_manager)
+        self.game_screen = GameScreen(self.state_manager, self.situation_manager)
 
         self.loop = urwid.MainLoop(self.new_game_screen)
 
@@ -44,8 +44,8 @@ class GameController():
         self.game_screen.update_buttons(self.situation_manager.current_situation.get_option_response())
         self.__show_game_screen()
 
-    def __consequence(self, signal_emitter=None):
-        self.state_manager.apply_stats()
+    def __consequence(self, signal_emitter=None, choice=""):
+        self.state_manager.apply_stats(choice)
 
     def __quit(self, signal_emitter=None):
         raise urwid.ExitMainLoop()
