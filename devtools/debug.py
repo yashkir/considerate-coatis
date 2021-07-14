@@ -12,7 +12,7 @@ def debug(*args, sep=' ', end='\n'):
             text += sep
     text += end
 
-    with open('devtools/debug_logs.txt', 'a') as file:
+    with open('logs/debug_logs.txt', 'a') as file:
         file.write(f'[{timestamp}] {text}')
 
 
