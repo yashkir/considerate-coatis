@@ -20,4 +20,4 @@ class HelpScreen(urwid.LineBox):
             self._emit('prev')
 
 
-urwid.register_signal(HelpScreen, ['quit', 'restart', 'prev'])
+urwid.register_signal(HelpScreen, ['prev'])
