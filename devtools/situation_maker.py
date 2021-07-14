@@ -9,7 +9,7 @@ class make_situation:
 
     def start(self):
         """Starts here"""
-        self.file.write('[{')
+        self.file.write('\n{')
         self.prompt()
         self.end()
         again = input('do you want to make another one?: ')
@@ -25,7 +25,7 @@ class make_situation:
 
     def end(self):
         """Ends here"""
-        self.file.write('}]')
+        self.file.write('},')
 
     def add_stats(self):
         """Adds stats"""
