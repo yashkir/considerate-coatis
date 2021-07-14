@@ -22,5 +22,11 @@ class NewGameScreen(urwid.LineBox):
     def __load(self, button):
         self._emit('load')
 
+    def keypress(self, size, key):
+        """Handles Keypress to get to Help Screen"""
+        key = super().keypress(size, key)
+        if str(key).lower() == 'h':
+            self._emit('help')
 
-urwid.register_signal(NewGameScreen, ['start game', 'quit', 'load'])
+
+urwid.register_signal(NewGameScreen, ['start game', 'quit', 'load', 'help'])

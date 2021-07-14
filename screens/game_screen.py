@@ -55,9 +55,17 @@ class GameScreen(urwid.LineBox):
         # final_buttons = urwid.MonitoredFocusList(list_buttons, focus=0)
         self.button_columns.base_widget.contents = list_buttons
 
+    def keypress(self, size, key):
+        """Handle q for quitting and Keypress to get to Help Screen"""
+        key = super().keypress(size, key)
+        if str(key).lower() == 'q':
+            raise urwid.ExitMainLoop()
+        if str(key).lower() == 'h':
+            self._emit('help')
+
     def __choice(self, object):
         choice_text = object.get_label()
         self._emit('choice', choice_text)
 
 
-urwid.register_signal(GameScreen, ['quit', 'restart', 'choice'])
+urwid.register_signal(GameScreen, ['quit', 'restart', 'help', 'choice'])

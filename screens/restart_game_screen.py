@@ -22,5 +22,11 @@ class RestartGameScreen(urwid.LineBox):
     def __quit(self, button):
         self._emit('quit')
 
+    def keypress(self, size, key):
+        """Handles Keypress to get to Help Screen"""
+        key = super().keypress(size, key)
+        if str(key).lower() == 'h':
+            self._emit('help')
 
-urwid.register_signal(RestartGameScreen, ['restart', 'go back', 'quit'])
+
+urwid.register_signal(RestartGameScreen, ['restart', 'go back', 'quit', 'help'])

@@ -3,6 +3,7 @@ import urwid
 from logic.SituationManager import SituationManager
 from logic.StateManager import StateManager
 from screens.game_screen import GameScreen
+from screens.help_screen import HelpScreen
 from screens.new_game_screen import NewGameScreen
 from screens.restart_game_screen import RestartGameScreen
 from screens.state_manager_screen import StateManagerScreen
@@ -13,10 +14,11 @@ class GameController():
 
     def __init__(self):
 
-        self.situation_manager = SituationManager()
-        self.situation_manager.load_situation()
         self.new_game_screen = NewGameScreen()
         self.restart_game_screen = RestartGameScreen()
+        self.help_screen = HelpScreen()
+        self.situation_manager = SituationManager()
+        self.situation_manager.load_situation()
         self.state_manager_screen = StateManagerScreen()
         self.state_manager = StateManager(self)
         self.game_screen = GameScreen(self.state_manager, self.situation_manager)
@@ -26,17 +28,25 @@ class GameController():
         urwid.connect_signal(self.new_game_screen, 'start game', self.__start)
         urwid.connect_signal(self.new_game_screen, 'quit', self.__quit)
         urwid.connect_signal(self.new_game_screen, 'load', self.__show_state_manager_screen)
+        urwid.connect_signal(self.new_game_screen, 'help', self.__show_help_screen)
 
         urwid.connect_signal(self.restart_game_screen, 'restart', self.__restart)
         urwid.connect_signal(self.restart_game_screen, 'go back', self.__show_game_screen)
         urwid.connect_signal(self.restart_game_screen, 'quit', self.__quit)
+        urwid.connect_signal(self.restart_game_screen, 'help', self.__show_help_screen)
 
         urwid.connect_signal(self.state_manager_screen, 'back', self.__show_new_game_screen)
         urwid.connect_signal(self.state_manager_screen, 'load save', self.__load_save)
 
         urwid.connect_signal(self.game_screen, 'quit', self.__quit)
         urwid.connect_signal(self.game_screen, 'restart', self.__show_restart_screen)
+        urwid.connect_signal(self.game_screen, 'help', self.__show_help_screen)
+
+        urwid.connect_signal(self.help_screen, 'prev', self.__show_prev_screen)
+
         urwid.connect_signal(self.game_screen, 'choice', self.__consequence)
+
+        self.prev = self.loop.widget
 
         self.loop.run()
 
@@ -71,6 +81,13 @@ class GameController():
 
     def __show_state_manager_screen(self, signal_emitter=None):
         self.loop.widget = self.state_manager_screen
+
+    def __show_help_screen(self, signal_emitter=None):
+        self.prev = self.loop.widget
+        self.loop.widget = self.help_screen
+
+    def __show_prev_screen(self, signal_emitter=None):
+        self.loop.widget = self.prev
 
 
 if __name__ == "__main__":
