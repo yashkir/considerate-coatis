@@ -54,8 +54,8 @@ class GameController():
         self.loop.widget = self.new_game_screen
         self.state_manager.reset()
 
-    def __load_save(self, signal_emitter=None):
-        self.state_manager.load_state(self.state_manager_screen.chosen_save)
+    def __load_save(self, signal_emitter=None, chosen_save=""):
+        self.state_manager.load_state(chosen_save)
         self.state_manager.set_state()
         self.__start()
 

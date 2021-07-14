@@ -28,8 +28,9 @@ class StateManagerScreen(urwid.LineBox):
     def __load_save(self, button):
         for path in self.saves:
             if button.label == str.split(path.name, '.')[0]:
-                self.chosen_save = self.saves[self.saves.index(path)]
-        self._emit("load save")
+                chosen_save = self.saves[self.saves.index(path)]
+
+        self._emit("load save", chosen_save)
 
 
 urwid.register_signal(StateManagerScreen, ['back', 'load save'])
