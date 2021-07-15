@@ -23,11 +23,10 @@ class HelpScreen(urwid.LineBox):
         if str(key).lower() == 'h':
             self._emit('prev')
 
-title_text = """__      __           _    _        __ _        _____  _  _    _
-\ \    / / ___  _ _ | |__(_) _ _  / _` |      |_   _|(_)| |_ | | ___
- \ \/\/ / / _ \| '_|| / /| || ' \ \__. |        | |  | ||  _|| |/ -_)
-  \_/\_/  \___/|_|  |_\_\|_||_||_||___/         |_|  |_| \__||_|\___|
-""" # noqa: CODE
+
+title_text_raw = open("screens/Ascii_Title.txt", "r")
+
+title_text = title_text_raw.read()
 
 description_text = """Welcome to the game of alien life. You play as Xanathar, an alien trying to navigate their way through high school.\n
 Your objective is not to stand out, but to remain under the radar and while still being as happy as possible.
