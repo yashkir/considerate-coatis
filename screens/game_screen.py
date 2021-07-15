@@ -43,7 +43,6 @@ class GameScreen(urwid.LineBox):
 
     def update_buttons(self, response_list):
         """Where the buttons will be updated"""
-        self.button_columns.base_widget._set_focus_position(0)
         list_buttons = []
 
         list_buttons.append((self.button_one, ('given', 10)))
