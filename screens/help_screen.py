@@ -24,11 +24,14 @@ class HelpScreen(urwid.LineBox):
             self._emit('prev')
 
 
-title_text_raw = open("screens/Ascii_Title.txt", "r")
+title1 = "__      __           _    _        __ _        _____  _  _    _      \n" # noqa: CODE
+title2 = "\ \    / / ___  _ _ | |__(_) _ _  / _` |      |_   _|(_)| |_ | | ___ \n" # noqa: CODE
+title3 = " \ \/\/ / / _ \| '_|| / /| || ' \ \__. |        | |  | ||  _|| |/ -_)\n" # noqa: CODE
+title4 = "  \_/\_/  \___/|_|  |_\_\|_||_||_||___/         |_|  |_| \__||_|\___|\n" # noqa: CODE
 
-title_text = title_text_raw.read()
+title_text = title1 + title2 + title3 + title4
 
-description_text = """Welcome to the game of alien life. You play as Xanathar, an alien trying to navigate their way through high school.\n
+description_text = """Welcome to the game of alien life. You play as Xanathar, an alien trying to navigate their way through high school.
 Your objective is not to stand out, but to remain under the radar and while still being as happy as possible.
 
 You'll be met with many challenges and situations, and it's your job to navigate them to the end without drawing too much attention to yourself!"""# noqa: CODE
