@@ -1,7 +1,6 @@
 import json
 import os
 
-from devtools.debug import debug
 from logic.player import Stats
 
 INITIAL_STATE_PATH = os.path.join("logic", "initial_state.json")
@@ -29,7 +28,6 @@ class StateManager():
         """Load state from file."""
         file = open(path, mode='r')
         self.state = json.load(file)
-        debug(self.state)
         file.close()
 
     def reset(self):
@@ -37,7 +35,7 @@ class StateManager():
         self.game.situation_manager.reset()
         self.player_stats.reset()
         self.load_initial_state()
-        self.load_situation()
+        self.game.situation_manager.load_situation()
         self.game.game_screen.update_text()
 
     def set_state(self):

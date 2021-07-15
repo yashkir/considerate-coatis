@@ -26,7 +26,6 @@ class GameController():
         self.game_screen = GameScreen(self.state_manager, self.situation_manager)
         self.game_over_screen = GameOverScreen()
         self.save_screen = SaveGameScreen()
-        self.state_manager.load_initial_state()
 
         urwid.connect_signal(self.new_game_screen, 'start game', self.__start)
         urwid.connect_signal(self.new_game_screen, 'quit', self.__quit)
