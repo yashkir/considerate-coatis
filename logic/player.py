@@ -34,4 +34,6 @@ class Stats:
         self.charisma = 50
         self.wisdom = 50
         self.smartness = 50
+        self.sus_int = 0
+        self.sad_int = 0
         self.update_text()

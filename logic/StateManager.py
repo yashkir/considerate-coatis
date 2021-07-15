@@ -1,7 +1,6 @@
 import json
 import os
 
-from devtools.debug import debug
 from logic.player import Stats
 
 INITIAL_STATE_PATH = os.path.join("logic", "initial_state.json")
@@ -47,7 +46,6 @@ class StateManager():
         cur_stats.smartness = self.state[0]['player']['stats']['smartness']
         cur_stats.wisdom = self.state[0]['player']['stats']['wisdom']
         for x in self.state[0]['player']['stats']:
-            debug(x)
             if self.state[0]['player']['stats'][str(x)] > 50:
                 self.player_stats.sus_int += self.state[0]['player']['stats'][str(x)]
             if self.state[0]['player']['stats'][str(x)] < 50:
@@ -69,13 +67,12 @@ class StateManager():
         cur_stats.smartness += self.stats['academic']
         cur_stats.wisdom += self.stats['social'] + self.stats['academic']
         for x in self.stats:
-            debug(x)
             if self.stats[x] > 0:
                 self.player_stats.sus_int += self.stats[x]
             if self.stats[x] < 0:
                 self.player_stats.sad_int += self.stats[x] * -1
-        if self.player_stats.sus_int > 50 or self.sad_int > 50:
-            ...
+        if self.player_stats.sus_int > 50 or self.player_stats.sad_int > 50:
+            self.game.show_game_over_screen()
         else:
             self.game.game_screen.situation_manager.load_situation()
         self.game.game_screen.update_text()
@@ -84,6 +81,7 @@ class StateManager():
 
 
 if __name__ == "__main__":
+
     print("Testing StateManager...")
 
     path = "test.json"
