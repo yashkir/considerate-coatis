@@ -16,7 +16,7 @@ class StateManager():
 
     def load_initial_state(self):
         """Generate a initial state for a new game."""
-        self.state = self.load_state(INITIAL_STATE_PATH)
+        self.load_state(INITIAL_STATE_PATH)
 
     def save_state(self, path: str) -> None:
         """Save state to file."""
@@ -28,6 +28,7 @@ class StateManager():
         """Load state from file."""
         file = open(path, mode='r')
         self.state = json.load(file)
+        self.set_state()
         file.close()
 
     def reset(self):
@@ -40,16 +41,14 @@ class StateManager():
 
     def set_state(self):
         """Sets the player state to the state that is loaded"""
-        cur_stats = self.player_stats
-        cur_stats.athletic_ability = self.state[0]['player']['stats']['athletic ability']
-        cur_stats.charisma = self.state[0]['player']['stats']['charisma']
-        cur_stats.smartness = self.state[0]['player']['stats']['smartness']
-        cur_stats.wisdom = self.state[0]['player']['stats']['wisdom']
+        self.player_stats.sus_int, self.player_stats.sad_int = 0, 0
         for x in self.state[0]['player']['stats']:
-            if self.state[0]['player']['stats'][str(x)]-50 > 0:
-                self.player_stats.sus_int += self.state[0]['player']['stats'][str(x)] - 50
-            if self.state[0]['player']['stats'][str(x)]-50 < 0:
-                self.player_stats.sad_int += (self.state[0]['player']['stats'][str(x)] - 50) * -1
+            cur = self.state[0]['player']['stats'][str(x)]
+            if cur-50 > 0:
+                self.player_stats.sus_int += cur - 50
+            if cur-50 < 0:
+                self.player_stats.sad_int += (cur - 50) * -1
+            self.player_stats.stat_dict[x] = cur
         self.player_stats.update_text()
 
     def apply_stats(self, response):
@@ -57,20 +56,22 @@ class StateManager():
         # TODO still more pork to cut here
 
         self.stats = self.game.situation_manager.current_situation.get_option_stats(int(response[0])-1)
-        cur_stats = self.player_stats
-        cur_stats.athletic_ability += self.stats['athletic']
-        cur_stats.charisma += self.stats['social']
-        cur_stats.smartness += self.stats['academic']
-        cur_stats.wisdom += self.stats['social'] + self.stats['academic']
+        cur_stats = self.player_stats.stat_dict
+
         for x in self.stats:
             if self.stats[x] > 0:
                 self.player_stats.sus_int += self.stats[x]
             if self.stats[x] < 0:
                 self.player_stats.sad_int += self.stats[x] * -1
+
+            cur_stats[x] += self.stats[x]
+
         if self.player_stats.sus_int > 50 or self.player_stats.sad_int > 50:
             self.game.show_game_over_screen()
+
         else:
             self.game.game_screen.situation_manager.load_situation()
+
         self.game.game_screen.update_text()
         self.game.game_screen.update_buttons(self.game.situation_manager.current_situation.get_option_response())
         self.player_stats.update_text()

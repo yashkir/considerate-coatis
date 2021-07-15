@@ -12,7 +12,9 @@ class Stats:
         self.smartness = smartness
         self.sus_int = 0
         self.sad_int = 0
-        self.stat_list = [self.athletic_ability, self.charisma, self.wisdom, self.smartness]
+        self.stat_dict = {
+            "athletic ability": self.athletic_ability, "charisma": self.charisma,
+            "wisdom": self.wisdom, "smartness": self.smartness}
         self.stat_list_text = urwid.Text(
             f"strength: {str(self.athletic_ability)}\ncharisma: {str(self.charisma)}\n"
             + f"wisdom: {str(self.wisdom)}\nsmartness: {str(self.smartness)}\n"
@@ -22,8 +24,8 @@ class Stats:
     def update_text(self):
         """This is where the text will update"""
         stat_list_text = (
-            f"strength: {str(self.athletic_ability)}\ncharisma: {str(self.charisma)}\n"
-            + f"wisdom: {str(self.wisdom)}\nsmartness: {str(self.smartness)}\n"
+            f"strength: {self.stat_dict['athletic ability']}\ncharisma: {self.stat_dict['charisma']}\n"
+            + f"wisdom: {self.stat_dict['wisdom']}\nsmartness: {self.stat_dict['smartness']}\n"
             + f"sus: {str(self.sus_int)}\nsadness: {str(self.sad_int)}\n")
         self.stat_list_text.set_text(stat_list_text)
         return stat_list_text
@@ -36,4 +38,7 @@ class Stats:
         self.smartness = 50
         self.sus_int = 0
         self.sad_int = 0
+        self.stat_dict = {
+            "athletic ability": self.athletic_ability, "charisma": self.charisma,
+            "wisdom": self.wisdom, "smartness": self.smartness}
         self.update_text()

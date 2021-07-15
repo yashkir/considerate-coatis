@@ -5,17 +5,17 @@
             {
                 "response": "I will study for the test.",
                 "stats": {
-                    "social": -10,
-                    "athletic": -10,
-                    "academic": 10
+                    "charisma": -10,
+                    "athletic ability": -10,
+                    "smartness": 10
                 }
             },
             {
                 "response": "I will rest for the race.",
                 "stats": {
-                    "social": 10,
-                    "athletic": 5,
-                    "academic": -5
+                    "charisma": 10,
+                    "athletic ability": 5,
+                    "smartness": -5
                 }
             }
         ]
@@ -26,17 +26,17 @@
             {
                 "response": "nerds",
                 "stats": {
-                    "social": -10,
-                    "athletic": -10,
-                    "academic": 10
+                    "charisma": -10,
+                    "athletic ability": -10,
+                    "smartness": 10
                 }
             },
             {
                 "response": "jocks",
                 "stats": {
-                    "social": 10,
-                    "athletic": 10,
-                    "academic": -10
+                    "charisma": 10,
+                    "athletic ability": 10,
+                    "smartness": -10
                 }
             }
         ]
@@ -47,17 +47,17 @@
             {
                 "response": "go to the party",
                 "stats": {
-                    "social": 10,
-                    "athletic": 4,
-                    "academic": -10
+                    "charisma": 10,
+                    "athletic ability": 4,
+                    "smartness": -10
                 }
             },
             {
                 "response": "study",
                 "stats": {
-                    "social": -7,
-                    "athletic": -4,
-                    "academic": 10
+                    "charisma": -7,
+                    "athletic ability": -4,
+                    "smartness": 10
                 }
             }
         ]
@@ -68,17 +68,17 @@
             {
                 "response": "make her feel better",
                 "stats": {
-                    "social": 10,
-                    "athletic": -4,
-                    "academic": -8
+                    "charisma": 10,
+                    "athletic ability": -4,
+                    "smartness": -8
                 }
             },
             {
                 "response": "ignore it",
                 "stats": {
-                    "social": -10,
-                    "athletic": 0,
-                    "academic": 0
+                    "charisma": -10,
+                    "athletic ability": 0,
+                    "smartness": 0
                 }
             }
         ]
