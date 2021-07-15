@@ -7,13 +7,13 @@ from screens.help_screen import HelpScreen
 from screens.new_game_screen import NewGameScreen
 from screens.restart_game_screen import RestartGameScreen
 from screens.state_manager_screen import StateManagerScreen
+from settings import OVERLAY_HEIGHT, OVERLAY_WIDTH, PALETTE, PALETTE_COLORS
 
 
 class GameController():
     """Shows a new game prompt and switches to the game screen or quits."""
 
     def __init__(self):
-
         self.new_game_screen = NewGameScreen()
         self.restart_game_screen = RestartGameScreen()
         self.help_screen = HelpScreen()
@@ -22,8 +22,6 @@ class GameController():
         self.state_manager_screen = StateManagerScreen()
         self.state_manager = StateManager(self)
         self.game_screen = GameScreen(self.state_manager, self.situation_manager)
-
-        self.loop = urwid.MainLoop(self.new_game_screen)
 
         urwid.connect_signal(self.new_game_screen, 'start game', self.__start)
         urwid.connect_signal(self.new_game_screen, 'quit', self.__quit)
@@ -46,9 +44,18 @@ class GameController():
 
         urwid.connect_signal(self.game_screen, 'choice', self.__consequence)
 
-        self.prev = self.loop.widget
+        # Set up background and overlay
+        self.background = urwid.AttrMap(urwid.SolidFill('.'), 'background')
+        self.overlay = urwid.Overlay(self.new_game_screen, self.background,
+                                     'center', OVERLAY_WIDTH, 'middle', OVERLAY_HEIGHT)
 
+        # Start the MainLoop
+        self.loop = urwid.MainLoop(self.overlay, PALETTE)
+        self.loop.screen.set_terminal_properties(colors=PALETTE_COLORS)
+        self.prev = self.loop.widget
         self.loop.run()
+
+    # Game Flow Methods
 
     def __start(self, signal_emitter=None):
         self.game_screen.update_buttons(self.situation_manager.current_situation.get_option_response())
@@ -61,7 +68,7 @@ class GameController():
         raise urwid.ExitMainLoop()
 
     def __restart(self, signal_emitter=None):
-        self.loop.widget = self.new_game_screen
+        self.__show_new_game_screen()
         self.state_manager.reset()
 
     def __load_save(self, signal_emitter=None, chosen_save=""):
@@ -69,24 +76,37 @@ class GameController():
         self.state_manager.set_state()
         self.__start()
 
+    # Screen Switching Methods
+
     def __show_new_game_screen(self, signal_emitter=None):
-        self.loop.widget = self.new_game_screen
+        self.__set_overlay(self.new_game_screen)
 
     def __show_game_screen(self, signal_emitter=None):
-        self.loop.widget = self.game_screen
+        self.__set_overlay(self.game_screen)
 
     def __show_restart_screen(self, signal_emitter=None):
-        self.loop.widget = self.restart_game_screen
+        self.__set_overlay(self.restart_game_screen)
 
     def __show_state_manager_screen(self, signal_emitter=None):
-        self.loop.widget = self.state_manager_screen
+        self.__set_overlay(self.state_manager_screen)
 
     def __show_help_screen(self, signal_emitter=None):
-        self.prev = self.loop.widget
-        self.loop.widget = self.help_screen
+        self.prev = self.__get_overlay_top()
+        self.__set_overlay(self.help_screen)
 
     def __show_prev_screen(self, signal_emitter=None):
-        self.loop.widget = self.prev
+        self.__set_overlay(self.prev)
+
+    # Overlay methods
+
+    def __get_overlay_top(self):
+        return self.overlay.contents[1][0]
+
+    def __set_overlay(self, widget):
+        """Replace the top widget of the main overlay"""
+        self.overlay = urwid.Overlay(widget, self.background,
+                                     'center', OVERLAY_WIDTH, 'middle', OVERLAY_HEIGHT)
+        self.loop.widget = self.overlay
 
 
 if __name__ == "__main__":
