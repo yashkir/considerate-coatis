@@ -65,6 +65,7 @@ class StateManager():
                 self.player_stats.sad_int += self.stats[x] * -1
 
             cur_stats[x] += self.stats[x]
+            self.state[0]['player']['stats'][str(x)] = self.player_stats.stat_dict[x]
 
         if self.player_stats.sus_int > 50 or self.player_stats.sad_int > 50:
             self.game.show_game_over_screen()
