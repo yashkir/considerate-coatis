@@ -1,8 +1,6 @@
 import urwid
 from urwid.widget import CENTER
 
-from devtools.debug import debug
-
 
 class GameScreen(urwid.LineBox):
     """Main game screen."""
@@ -66,7 +64,6 @@ class GameScreen(urwid.LineBox):
 
     def __choice(self, object):
         self.button_columns.base_widget._w.focus.base_widget._set_focus_position(0)
-        debug(self.button_columns.base_widget._w.focus)
         choice_text = object.get_label()
         self._emit('choice', choice_text)
 
