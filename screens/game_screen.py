@@ -63,11 +63,10 @@ class GameScreen(urwid.LineBox):
             raise urwid.ExitMainLoop()
         if str(key).lower() == 'h':
             self._emit('help')
-        if str(key).lower() == 'r':
-            self.button_columns.base_widget._set_focus_position(0)
 
     def __choice(self, object):
-        debug(self.pile.focus_position)
+        self.button_columns.base_widget._w.focus.base_widget._set_focus_position(0)
+        debug(self.button_columns.base_widget._w.focus)
         choice_text = object.get_label()
         self._emit('choice', choice_text)
 
