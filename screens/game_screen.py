@@ -42,15 +42,15 @@ class GameScreen(urwid.LineBox):
         self.button_columns.base_widget._set_focus_position(0)
         list_buttons = []
 
+        list_buttons.append((self.button_one, ('given', self.button_width)))
+        list_buttons.append((self.button_two, ('given', self.button_width)))
+
         for r in range(len(response_list)):
             list_buttons.append((
                 urwid.Button(
                     str(r+1) + ' ' + str(response_list[r])
                     + self.situation_manager.current_situation.get_option_stats_str(r),
                     self.__choice), ('given', self.button_width)))
-
-        list_buttons.append((self.button_one, ('given', self.button_width)))
-        list_buttons.append((self.button_two, ('given', self.button_width)))
 
         self.button_columns.base_widget.contents = list_buttons
 
@@ -63,6 +63,7 @@ class GameScreen(urwid.LineBox):
             self._emit('help')
 
     def __choice(self, object):
+        self.button_columns.base_widget._w.focus.base_widget._set_focus_position(0)
         choice_text = object.get_label()
         self._emit('choice', choice_text)
 
