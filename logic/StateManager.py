@@ -55,12 +55,8 @@ class StateManager():
     def apply_stats(self, response):
         """Where the stats will be applied"""
         # TODO still more pork to cut here
-        responses = self.game.situation_manager.current_situation.get_option_response()
-        for r in range(len(responses)):
-            if int(response[0])-1 == r:
-                chosen_response = r
 
-        self.stats = self.game.situation_manager.current_situation.get_option_stats(chosen_response)
+        self.stats = self.game.situation_manager.current_situation.get_option_stats(int(response[0])-1)
         cur_stats = self.player_stats
         cur_stats.athletic_ability += self.stats['athletic']
         cur_stats.charisma += self.stats['social']
