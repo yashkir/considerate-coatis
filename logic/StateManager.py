@@ -1,7 +1,8 @@
 import json
 import os
 
-from logic.player import Player, Stats
+from devtools.debug import debug
+from logic.player import Stats
 
 INITIAL_STATE_PATH = os.path.join("logic", "initial_state.json")
 
@@ -11,7 +12,7 @@ class StateManager():
 
     def __init__(self, game):
         self.state = {}
-        self.player = Player(Stats(50, 50, 50, 50), 1, 1)
+        self.player_stats = Stats(50, 50, 50, 50)
         self.game = game
 
     def load_initial_state(self):
@@ -33,19 +34,25 @@ class StateManager():
     def reset(self):
         """Reset everything"""
         self.game.situation_manager.reset()
-        self.player.stats.reset()
+        self.player_stats.reset()
         self.game.state_manager.load_initial_state()
         self.game.situation_manager.load_situation()
         self.game.game_screen.update_text()
 
     def set_state(self):
         """Sets the player state to the state that is loaded"""
-        cur_stats = self.player.stats
+        cur_stats = self.player_stats
         cur_stats.athletic_ability = self.state[0]['player']['stats']['athletic ability']
         cur_stats.charisma = self.state[0]['player']['stats']['charisma']
         cur_stats.smartness = self.state[0]['player']['stats']['smartness']
         cur_stats.wisdom = self.state[0]['player']['stats']['wisdom']
-        self.player.stats.update_text()
+        for x in self.state[0]['player']['stats']:
+            debug(x)
+            if self.state[0]['player']['stats'][str(x)] > 50:
+                self.player_stats.sus_int += self.state[0]['player']['stats'][str(x)]
+            if self.state[0]['player']['stats'][str(x)] < 50:
+                self.player_stats.sad_int += self.state[0]['player']['stats'][str(x)]
+        self.player_stats.update_text()
 
     def apply_stats(self, response):
         """Where the stats will be applied"""
@@ -56,15 +63,24 @@ class StateManager():
                 chosen_response = r
 
         self.stats = self.game.situation_manager.current_situation.get_option_stats(chosen_response)
-        cur_stats = self.player.stats
+        cur_stats = self.player_stats
         cur_stats.athletic_ability += self.stats['athletic']
         cur_stats.charisma += self.stats['social']
         cur_stats.smartness += self.stats['academic']
         cur_stats.wisdom += self.stats['social'] + self.stats['academic']
-        self.game.game_screen.situation_manager.load_situation()
+        for x in self.stats:
+            debug(x)
+            if self.stats[x] > 0:
+                self.player_stats.sus_int += self.stats[x]
+            if self.stats[x] < 0:
+                self.player_stats.sad_int += self.stats[x] * -1
+        if self.player_stats.sus_int > 50 or self.sad_int > 50:
+            ...
+        else:
+            self.game.game_screen.situation_manager.load_situation()
         self.game.game_screen.update_text()
         self.game.game_screen.update_buttons(self.game.situation_manager.current_situation.get_option_response())
-        self.player.stats.update_text()
+        self.player_stats.update_text()
 
 
 if __name__ == "__main__":

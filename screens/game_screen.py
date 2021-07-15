@@ -12,7 +12,7 @@ class GameScreen(urwid.LineBox):
         self.text = urwid.Text("placeholder")
         self.fill = urwid.Filler(self.text, 'top')
         self.stats_box = urwid.LineBox(
-            urwid.Filler(self.state_manager.player.stats.stat_list_text, 'middle'), title="stats")
+            urwid.Filler(self.state_manager.player_stats.stat_list_text, 'middle'), title="stats")
         self.location_box = urwid.LineBox(self.fill, title="location")
         self.situation_text = urwid.Text(self.situation_manager.current_situation.get_prompt(), align=CENTER)
         self.event_box = urwid.LineBox(urwid.Filler(self.situation_text, 'middle'), title="event")
@@ -35,7 +35,7 @@ class GameScreen(urwid.LineBox):
     def update_text(self):
         """Where all the text will be updated"""
         self.situation_text.set_text(self.situation_manager.current_situation.get_prompt())
-        self.state_manager.player.stats.update_text()
+        self.state_manager.player_stats.update_text()
 
     def update_buttons(self, response_list):
         """Where the buttons will be updated"""
