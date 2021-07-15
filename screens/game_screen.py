@@ -21,8 +21,12 @@ class GameScreen(urwid.LineBox):
         self.button_width = 20
         self.button_one = urwid.Button("quit", lambda _: self._emit('quit'))
         self.button_two = urwid.Button("Restart", lambda _: self._emit('restart'))
+        self.button_three = urwid.Button("help", lambda _: self._emit('help'))
+        self.button_four = urwid.Button("save", lambda _: self._emit('save'))
         self.button_columns = urwid.Filler(
-            urwid.GridFlow([self.button_one, self.button_two], self.button_width, 2, 1, 'center'))
+            urwid.GridFlow(
+                [self.button_one, self.button_two, self.button_three, self.button_four],
+                self.button_width, 2, 1, 'center'))
         self.button_box = urwid.LineBox(self.button_columns, title="buttons")
         self.choice_count = 0
 
@@ -42,8 +46,10 @@ class GameScreen(urwid.LineBox):
         self.button_columns.base_widget._set_focus_position(0)
         list_buttons = []
 
-        list_buttons.append((self.button_one, ('given', self.button_width)))
-        list_buttons.append((self.button_two, ('given', self.button_width)))
+        list_buttons.append((self.button_one, ('given', 10)))
+        list_buttons.append((self.button_two, ('given', 11)))
+        list_buttons.append((self.button_three, ('given', 10)))
+        list_buttons.append((self.button_four, ('given', 10)))
 
         for r in range(len(response_list)):
             list_buttons.append((
@@ -68,4 +74,4 @@ class GameScreen(urwid.LineBox):
         self._emit('choice', choice_text)
 
 
-urwid.register_signal(GameScreen, ['quit', 'restart', 'help', 'choice'])
+urwid.register_signal(GameScreen, ['quit', 'restart', 'help', 'choice', 'save'])
