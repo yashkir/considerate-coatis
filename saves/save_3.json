@@ -4,10 +4,10 @@
         "player": {
             "name": "Player",
             "stats": {
-                "athletic ability": 53,
-                "charisma": 23,
-                "wisdom": 98,
-                "smartness": 70
+                "athletic ability": 60,
+                "charisma": 40,
+                "wisdom": 50,
+                "smartness": 50
             }
         },
         "location_id": 1,

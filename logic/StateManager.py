@@ -46,10 +46,10 @@ class StateManager():
         cur_stats.smartness = self.state[0]['player']['stats']['smartness']
         cur_stats.wisdom = self.state[0]['player']['stats']['wisdom']
         for x in self.state[0]['player']['stats']:
-            if self.state[0]['player']['stats'][str(x)] > 50:
-                self.player_stats.sus_int += self.state[0]['player']['stats'][str(x)]
-            if self.state[0]['player']['stats'][str(x)] < 50:
-                self.player_stats.sad_int += self.state[0]['player']['stats'][str(x)]
+            if self.state[0]['player']['stats'][str(x)]-50 > 0:
+                self.player_stats.sus_int += self.state[0]['player']['stats'][str(x)] - 50
+            if self.state[0]['player']['stats'][str(x)]-50 < 0:
+                self.player_stats.sad_int += (self.state[0]['player']['stats'][str(x)] - 50) * -1
         self.player_stats.update_text()
 
     def apply_stats(self, response):
