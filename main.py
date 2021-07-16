@@ -9,6 +9,7 @@ from screens.new_game_screen import NewGameScreen
 from screens.restart_game_screen import RestartGameScreen
 from screens.save_screen import SaveGameScreen
 from screens.state_manager_screen import StateManagerScreen
+from screens.win_screen import WinScreen
 from settings import OVERLAY_HEIGHT, OVERLAY_WIDTH, PALETTE, PALETTE_COLORS
 
 
@@ -25,6 +26,7 @@ class GameController():
         self.game_screen = GameScreen(self.state_manager, self.situation_manager)
         self.game_over_screen = GameOverScreen()
         self.save_screen = SaveGameScreen()
+        self.win_screen = WinScreen()
         self.state_manager.load_initial_state()
 
         urwid.connect_signal(self.new_game_screen, 'start game', self.__start)
@@ -54,6 +56,8 @@ class GameController():
 
         urwid.connect_signal(self.save_screen, 'back', self.__show_game_screen)
         urwid.connect_signal(self.save_screen, 'save', self.__save)
+
+        urwid.connect_signal(self.win_screen, 'quit', self.__quit)
 
         # Set up background and overlay
         self.background = urwid.AttrMap(urwid.SolidFill('.'), 'background')
