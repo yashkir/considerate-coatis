@@ -68,7 +68,7 @@ class StateManager():
             self.state[0]['player']['stats'][str(x)] = self.player_stats.stat_dict[x]
 
         if self.player_stats.sus_int > 50 or self.player_stats.sad_int > 50:
-            self.game.show_game_over_screen()
+            self.game.game_screen.game_over()
 
         else:
             self.game.game_screen.situation_manager.load_situation()
@@ -79,7 +79,6 @@ class StateManager():
 
 
 if __name__ == "__main__":
-
     print("Testing StateManager...")
 
     path = "test.json"
