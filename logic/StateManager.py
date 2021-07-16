@@ -28,7 +28,7 @@ class StateManager():
         """Load state from file."""
         file = open(path, mode='r')
         self.state = json.load(file)
-        self.set_state()
+        self.__set_state()
         file.close()
 
     def reset(self):
@@ -39,39 +39,41 @@ class StateManager():
         self.game.situation_manager.load_situation()
         self.game.game_screen.update_text()
 
-    def set_state(self):
+    def __set_state(self):
         """Sets the player state to the state that is loaded"""
         self.player_stats.sus_int, self.player_stats.sad_int = 0, 0
-        for keys, values in self.state[0]['player']['stats'].items():
-            cur = self.state[0]['player']['stats'][keys]
-            if cur-50 > 0:
-                self.player_stats.sus_int += cur - 50
-            if cur-50 < 0:
-                self.player_stats.sad_int += (cur - 50) * -1
-            self.player_stats.stat_dict[keys] = cur
+
+        for stat, value in self.state[0]['player']['stats'].items():
+            if value - 50 > 0:
+                self.player_stats.sus_int += value - 50
+            if value - 50 < 0:
+                self.player_stats.sad_int += (value - 50) * -1
+            self.player_stats.stat_dict[stat] = value
+
         self.player_stats.update_text()
 
     def apply_stats(self, response):
-        """Where the stats will be applied"""
-        # TODO still more pork to cut here
+        """Apply the chosen option's stats to the player"""
+        self.player_stats.sus_int, self.player_stats.sad_int = 0, 0
 
         self.stats = self.game.situation_manager.current_situation.get_option_stats(int(response[0])-1)
         cur_stats = self.player_stats.stat_dict
 
-        for keys, values in self.state[0]['player']['stats'].items():
-            if keys == 'wisdom':
+        for stat, value in self.state[0]['player']['stats'].items():
+            if stat == 'wisdom':
                 continue
-            if self.stats[keys] > 0:
-                self.player_stats.sus_int += self.stats[keys]
-            if self.stats[keys] < 0:
-                self.player_stats.sad_int += self.stats[keys] * -1
+            if value - 50 > 0:
+                self.player_stats.sus_int += value - 50
+            elif value - 50 < 0:
+                self.player_stats.sad_int += (value - 50) * -1
 
-            cur_stats[keys] += self.stats[keys]
-            self.state[0]['player']['stats'][keys] = self.player_stats.stat_dict[keys]
+            # add the chosen option's stats
+            cur_stats[stat] += self.stats[stat]
+            self.state[0]['player']['stats'][stat] = self.player_stats.stat_dict[stat]
 
+        print(self.player_stats.sus_int, self.player_stats.sad_int)
         if self.player_stats.sus_int > 50 or self.player_stats.sad_int > 50:
             self.game.game_screen.game_over()
-
         else:
             self.game.game_screen.situation_manager.load_situation()
 
