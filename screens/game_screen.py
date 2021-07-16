@@ -14,7 +14,7 @@ class GameScreen(urwid.LineBox):
         self.stats_box = urwid.LineBox(
             urwid.Filler(self.state_manager.player_stats.stat_list_text, 'middle'), title="stats")
         self.location_box = urwid.LineBox(self.fill, title="location")
-        self.situation_text = urwid.Text(self.situation_manager.current_situation.get_prompt(), align=CENTER)
+        self.situation_text = urwid.Text('none', align=CENTER)
         self.event_box = urwid.LineBox(urwid.Filler(self.situation_text, 'middle'), title="event")
 
         # buttons

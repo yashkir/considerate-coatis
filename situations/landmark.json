@@ -27,5 +27,34 @@
             }
         }
     ]
+},
+{
+    "prompt": "The government is coming to take tests, what do you do?",
+    "options": [
+        {
+            "response": "not show up",
+            "stats": {
+                "charisma": -10,
+                "athletic ability": 0,
+                "smartness": 0
+            }
+        },
+        {
+            "response": "show up but do horrible",
+            "stats": {
+                "charisma": -5,
+                "athletic ability": -4,
+                "smartness": 0
+            }
+        },
+        {
+            "response": "show up but do really well",
+            "stats": {
+                "charisma": 5,
+                "athletic ability": 5,
+                "smartness": -5
+            }
+        }
+    ]
 }
 ]

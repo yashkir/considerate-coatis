@@ -28,6 +28,7 @@ class StateManager():
         """Load state from file."""
         file = open(path, mode='r')
         self.state = json.load(file)
+        self.game.situation_manager.load_situation(self.state[0]['situation_id'], specific=True)
         self.__set_state()
         file.close()
 
@@ -36,7 +37,6 @@ class StateManager():
         self.game.situation_manager.reset()
         self.player_stats.reset()
         self.load_initial_state()
-        self.game.situation_manager.load_situation()
         self.game.game_screen.update_text()
 
     def __set_state(self):
@@ -74,7 +74,9 @@ class StateManager():
         if self.player_stats.sus_int > 50 or self.player_stats.sad_int > 50:
             self.game.game_screen.game_over()
         else:
-            self.game.game_screen.situation_manager.load_situation()
+            self.game.game_screen.situation_manager.load_situation(self.state[0]['situation_id'])
+        if self.game.situation_manager.situation_counter == 5:
+            self.state[0]['situation_id'] += 1
 
         self.game.game_screen.update_text()
         self.game.game_screen.update_buttons(self.game.situation_manager.current_situation.get_option_response())
