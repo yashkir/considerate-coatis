@@ -11,7 +11,7 @@ class SituationManager():
         self.current_situation = None
         self.situation_counter = 0
 
-    def load_situation(self) -> None:
+    def load_situation(self, id) -> None:
         """Loads a new situation"""
         random.seed()
 
@@ -20,7 +20,7 @@ class SituationManager():
             with open('situations/landmark.json', 'r') as file:
                 situations = json.load(file)
 
-            data = situations[self.situation_counter % 5]
+            data = situations[id]
 
         # Get the data for a normal situation
         else:

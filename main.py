@@ -20,7 +20,6 @@ class GameController():
         self.restart_game_screen = RestartGameScreen()
         self.help_screen = HelpScreen()
         self.situation_manager = SituationManager()
-        self.situation_manager.load_situation()
         self.state_manager_screen = StateManagerScreen()
         self.state_manager = StateManager(self)
         self.game_screen = GameScreen(self.state_manager, self.situation_manager)
@@ -71,6 +70,7 @@ class GameController():
 
     def __start(self, signal_emitter=None):
         self.game_screen.update_buttons(self.situation_manager.current_situation.get_option_response())
+        self.game_screen.update_text()
         self.__show_game_screen()
 
     def __consequence(self, signal_emitter=None, choice=""):

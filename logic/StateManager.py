@@ -17,6 +17,7 @@ class StateManager():
     def load_initial_state(self):
         """Generate a initial state for a new game."""
         self.load_state(INITIAL_STATE_PATH)
+        self.game.situation_manager.load_situation(self.state[0]['situation_id'])
 
     def save_state(self, path: str) -> None:
         """Save state to file."""
@@ -72,9 +73,11 @@ class StateManager():
             self.state[0]['player']['stats'][stat] = self.player_stats.stat_dict[stat]
 
         if self.player_stats.sus_int > 50 or self.player_stats.sad_int > 50:
-            self.game.game_screen.game_over()
+            # self.game.game_screen.game_over()
+            ...
         else:
-            self.game.game_screen.situation_manager.load_situation()
+            self.state[0]['situation_id'] += 1
+            self.game.game_screen.situation_manager.load_situation(self.state[0]['situation_id'])
 
         self.game.game_screen.update_text()
         self.game.game_screen.update_buttons(self.game.situation_manager.current_situation.get_option_response())
