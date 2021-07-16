@@ -17,7 +17,6 @@ class StateManager():
     def load_initial_state(self):
         """Generate a initial state for a new game."""
         self.load_state(INITIAL_STATE_PATH)
-        self.game.situation_manager.load_situation(self.state[0]['situation_id'])
 
     def save_state(self, path: str) -> None:
         """Save state to file."""
@@ -29,6 +28,7 @@ class StateManager():
         """Load state from file."""
         file = open(path, mode='r')
         self.state = json.load(file)
+        self.game.situation_manager.load_situation(self.state[0]['situation_id'], specific=True)
         self.__set_state()
         file.close()
 
@@ -37,7 +37,6 @@ class StateManager():
         self.game.situation_manager.reset()
         self.player_stats.reset()
         self.load_initial_state()
-        self.game.situation_manager.load_situation()
         self.game.game_screen.update_text()
 
     def __set_state(self):
@@ -76,8 +75,9 @@ class StateManager():
             # self.game.game_screen.game_over()
             ...
         else:
-            self.state[0]['situation_id'] += 1
             self.game.game_screen.situation_manager.load_situation(self.state[0]['situation_id'])
+        if self.game.situation_manager.situation_counter == 5:
+            self.state[0]['situation_id'] += 1
 
         self.game.game_screen.update_text()
         self.game.game_screen.update_buttons(self.game.situation_manager.current_situation.get_option_response())

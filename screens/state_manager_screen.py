@@ -17,8 +17,8 @@ class StateManagerScreen(urwid.LineBox):
                 self.saves.append(path)
                 self.save_buttons.append(urwid.Button(str.split(path.name, '.')[0], self.__load_save))
 
-        buttons_grid = urwid.GridFlow([button_no]+self.save_buttons, 10, 5, 1, 'center')
-        buttons = urwid.Filler(buttons_grid)
+        self.buttons_grid = urwid.GridFlow([button_no]+self.save_buttons, 10, 5, 1, 'center')
+        buttons = urwid.Filler(self.buttons_grid)
 
         super().__init__(urwid.Pile([text, buttons]), title="load save")
 
@@ -31,6 +31,18 @@ class StateManagerScreen(urwid.LineBox):
                 chosen_save = self.saves[self.saves.index(path)]
 
         self._emit("load save", chosen_save)
+
+    def update(self):
+        """Where all the button will update"""
+        self.saves.clear()
+        save_buttons = []
+        for path in pathlib.Path("saves").iterdir():
+            if path.is_file():
+                self.saves.append(path)
+                save_buttons.append((
+                    urwid.Button(str.split(path.name, '.')[0]), ('given', 20)))
+
+        self.buttons_grid.base_widget.contents = save_buttons
 
 
 urwid.register_signal(StateManagerScreen, ['back', 'load save'])

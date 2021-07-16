@@ -1,6 +1,7 @@
 import json
 import random
 
+from devtools.debug import debug
 from logic.situation import Situation
 
 
@@ -10,27 +11,31 @@ class SituationManager():
     def __init__(self):
         self.current_situation = None
         self.situation_counter = 0
+        with open('situations/landmark.json', 'r') as file:
+            self.situations_cannon = json.load(file)
+        with open('situations/normal.json', 'r') as file:
+            self.situations_normal = json.load(file)
 
-    def load_situation(self, id) -> None:
+    def load_situation(self, id, specific=False) -> None:
         """Loads a new situation"""
         random.seed()
-
+        debug(self.situation_counter)
+        if specific:
+            data = self.situations_cannon[id]
         # Get the data for a landmark situation
-        if self.situation_counter % 5 == 0:
-            with open('situations/landmark.json', 'r') as file:
-                situations = json.load(file)
+        elif self.situation_counter >= 5:
 
-            data = situations[id]
+            data = self.situations_cannon[id]
 
         # Get the data for a normal situation
         else:
-            with open('situations/normal.json', 'r') as file:
-                situations = json.load(file)
 
-            data = situations[random.randint(0, len(situations)-1)]
+            data = self.situations_normal[random.randint(0, len(self.situations_normal)-1)]
 
         # Set the current situation to a new one
         self.current_situation = Situation(**data)
+        if self.situation_counter >= 5:
+            self.situation_counter = 0
         self.situation_counter += 1
 
     def get_situation(self) -> Situation:

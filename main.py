@@ -85,6 +85,7 @@ class GameController():
 
     def __save(self, signal_emitter=None):
         self.state_manager.save_state(f'saves/{str(self.save_screen.file_edit.get_edit_text())}.json')
+        self.state_manager_screen.update()
         self.__show_game_screen()
 
     def __load_save(self, signal_emitter=None, chosen_save=""):
