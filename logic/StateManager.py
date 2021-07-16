@@ -73,8 +73,10 @@ class StateManager():
 
         if self.player_stats.sus_int > 50 or self.player_stats.sad_int > 50:
             self.game.game_screen.game_over()
+
         if self.state[0]['situation_id'] == len(self.game.situation_manager.situations_cannon):
             self.game.game_screen.game_won()
+
         else:
             self.game.game_screen.situation_manager.load_situation(self.state[0]['situation_id'])
         if self.game.situation_manager.situation_counter == 5:

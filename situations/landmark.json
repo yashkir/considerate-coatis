@@ -29,7 +29,7 @@
     ]
 },
 {
-    "prompt": "the government is coming to take tests on everyone what do you do",
+    "prompt": "The government is coming to take tests, what do you do?",
     "options": [
         {
             "response": "not show up",
