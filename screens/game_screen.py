@@ -40,6 +40,10 @@ class GameScreen(urwid.LineBox):
         """This is the call that the state manager makes when the game is over"""
         self._emit("game over")
 
+    def game_won(self):
+        """This is the call that the state manager makes when the game is won"""
+        self._emit("won")
+
     def update_text(self):
         """Where all the text will be updated"""
         self.situation_text.set_text(self.situation_manager.current_situation.get_prompt())
@@ -77,4 +81,4 @@ class GameScreen(urwid.LineBox):
         self._emit('choice', choice_text)
 
 
-urwid.register_signal(GameScreen, ['quit', 'restart', 'help', 'choice', 'save', 'game over'])
+urwid.register_signal(GameScreen, ['quit', 'restart', 'help', 'choice', 'save', 'game over', 'won'])
