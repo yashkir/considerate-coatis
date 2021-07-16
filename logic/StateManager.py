@@ -72,8 +72,7 @@ class StateManager():
             self.state[0]['player']['stats'][stat] = self.player_stats.stat_dict[stat]
 
         if self.player_stats.sus_int > 50 or self.player_stats.sad_int > 50:
-            # self.game.game_screen.game_over()
-            ...
+            self.game.game_screen.game_over()
         else:
             self.game.game_screen.situation_manager.load_situation(self.state[0]['situation_id'])
         if self.game.situation_manager.situation_counter == 5:
