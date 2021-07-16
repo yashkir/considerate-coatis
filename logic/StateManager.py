@@ -42,13 +42,13 @@ class StateManager():
     def set_state(self):
         """Sets the player state to the state that is loaded"""
         self.player_stats.sus_int, self.player_stats.sad_int = 0, 0
-        for x in self.state[0]['player']['stats']:
-            cur = self.state[0]['player']['stats'][str(x)]
+        for keys, values in self.state[0]['player']['stats'].items():
+            cur = self.state[0]['player']['stats'][keys]
             if cur-50 > 0:
                 self.player_stats.sus_int += cur - 50
             if cur-50 < 0:
                 self.player_stats.sad_int += (cur - 50) * -1
-            self.player_stats.stat_dict[x] = cur
+            self.player_stats.stat_dict[keys] = cur
         self.player_stats.update_text()
 
     def apply_stats(self, response):
@@ -58,14 +58,16 @@ class StateManager():
         self.stats = self.game.situation_manager.current_situation.get_option_stats(int(response[0])-1)
         cur_stats = self.player_stats.stat_dict
 
-        for x in self.stats:
-            if self.stats[x] > 0:
-                self.player_stats.sus_int += self.stats[x]
-            if self.stats[x] < 0:
-                self.player_stats.sad_int += self.stats[x] * -1
+        for keys, values in self.state[0]['player']['stats'].items():
+            if keys == 'wisdom':
+                continue
+            if self.stats[keys] > 0:
+                self.player_stats.sus_int += self.stats[keys]
+            if self.stats[keys] < 0:
+                self.player_stats.sad_int += self.stats[keys] * -1
 
-            cur_stats[x] += self.stats[x]
-            self.state[0]['player']['stats'][str(x)] = self.player_stats.stat_dict[x]
+            cur_stats[keys] += self.stats[keys]
+            self.state[0]['player']['stats'][keys] = self.player_stats.stat_dict[keys]
 
         if self.player_stats.sus_int > 50 or self.player_stats.sad_int > 50:
             self.game.game_screen.game_over()
