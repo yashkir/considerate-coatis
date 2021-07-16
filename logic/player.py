@@ -23,7 +23,7 @@ class Stats:
 
     def update_text(self):
         """This is where the text will update"""
-        self.stat_dict['wisdom'] += self.stat_dict['smartness'] + self.stat_dict['charisma'] - 100
+        self.stat_dict['wisdom'] = self.stat_dict['smartness'] + self.stat_dict['charisma'] - 50
         stat_list_text = (
             f"strength: {self.stat_dict['athletic ability']}\ncharisma: {self.stat_dict['charisma']}\n"
             + f"wisdom: {self.stat_dict['wisdom']}\nsmartness: {self.stat_dict['smartness']}\n"
