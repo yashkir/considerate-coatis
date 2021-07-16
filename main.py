@@ -51,6 +51,7 @@ class GameController():
         urwid.connect_signal(self.game_screen, 'choice', self.__consequence)
         urwid.connect_signal(self.game_screen, 'save', self.__show_save_game_screen)
         urwid.connect_signal(self.game_screen, 'game over', self.__show_game_over_screen)
+        urwid.connect_signal(self.game_screen, 'won', self.__show_win_screen)
 
         urwid.connect_signal(self.help_screen, 'prev', self.__show_prev_screen)
 
@@ -121,8 +122,10 @@ class GameController():
         self.__set_overlay(self.prev)
 
     def __show_game_over_screen(self, signal_emitter=None):
-        """Changes the screen to the game over screen"""
         self.__set_overlay(self.game_over_screen)
+
+    def __show_win_screen(self, signal_emitter=None):
+        self.__set_overlay(self.win_screen)
 
     # Overlay methods
 
