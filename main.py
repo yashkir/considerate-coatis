@@ -2,10 +2,12 @@ import urwid
 
 from logic.SituationManager import SituationManager
 from logic.StateManager import StateManager
+from screens.game_over_screen import GameOverScreen
 from screens.game_screen import GameScreen
 from screens.help_screen import HelpScreen
 from screens.new_game_screen import NewGameScreen
 from screens.restart_game_screen import RestartGameScreen
+from screens.save_screen import SaveGameScreen
 from screens.state_manager_screen import StateManagerScreen
 from settings import OVERLAY_HEIGHT, OVERLAY_WIDTH, PALETTE, PALETTE_COLORS
 
@@ -22,6 +24,9 @@ class GameController():
         self.state_manager_screen = StateManagerScreen()
         self.state_manager = StateManager(self)
         self.game_screen = GameScreen(self.state_manager, self.situation_manager)
+        self.game_over_screen = GameOverScreen()
+        self.save_screen = SaveGameScreen()
+        self.state_manager.load_initial_state()
 
         urwid.connect_signal(self.new_game_screen, 'start game', self.__start)
         urwid.connect_signal(self.new_game_screen, 'quit', self.__quit)
@@ -33,16 +38,23 @@ class GameController():
         urwid.connect_signal(self.restart_game_screen, 'quit', self.__quit)
         urwid.connect_signal(self.restart_game_screen, 'help', self.__show_help_screen)
 
+        urwid.connect_signal(self.game_over_screen, 'quit', self.__quit)
+        urwid.connect_signal(self.game_over_screen, 'restart', self.__restart)
+
         urwid.connect_signal(self.state_manager_screen, 'back', self.__show_new_game_screen)
         urwid.connect_signal(self.state_manager_screen, 'load save', self.__load_save)
 
         urwid.connect_signal(self.game_screen, 'quit', self.__quit)
         urwid.connect_signal(self.game_screen, 'restart', self.__show_restart_screen)
         urwid.connect_signal(self.game_screen, 'help', self.__show_help_screen)
+        urwid.connect_signal(self.game_screen, 'choice', self.__consequence)
+        urwid.connect_signal(self.game_screen, 'save', self.__show_save_game_screen)
+        urwid.connect_signal(self.game_screen, 'game over', self.__show_game_over_screen)
 
         urwid.connect_signal(self.help_screen, 'prev', self.__show_prev_screen)
 
-        urwid.connect_signal(self.game_screen, 'choice', self.__consequence)
+        urwid.connect_signal(self.save_screen, 'back', self.__show_game_screen)
+        urwid.connect_signal(self.save_screen, 'save', self.__save)
 
         # Set up background and overlay
         self.background = urwid.AttrMap(urwid.SolidFill('.'), 'background')
@@ -71,12 +83,18 @@ class GameController():
         self.__show_new_game_screen()
         self.state_manager.reset()
 
+    def __save(self, signal_emitter=None):
+        self.state_manager.save_state(f'saves/{str(self.save_screen.file_edit.get_edit_text())}.json')
+        self.__show_game_screen()
+
     def __load_save(self, signal_emitter=None, chosen_save=""):
         self.state_manager.load_state(chosen_save)
-        self.state_manager.set_state()
         self.__start()
 
     # Screen Switching Methods
+
+    def __show_save_game_screen(self, signal_emitter=None):
+        self.__set_overlay(self.save_screen)
 
     def __show_new_game_screen(self, signal_emitter=None):
         self.__set_overlay(self.new_game_screen)
@@ -96,6 +114,10 @@ class GameController():
 
     def __show_prev_screen(self, signal_emitter=None):
         self.__set_overlay(self.prev)
+
+    def __show_game_over_screen(self, signal_emitter=None):
+        """Changes the screen to the game over screen"""
+        self.__set_overlay(self.game_over_screen)
 
     # Overlay methods
 

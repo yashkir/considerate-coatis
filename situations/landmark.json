@@ -5,25 +5,25 @@
         {
             "response": "The nerds.",
             "stats": {
-                "social": -10,
-                "athletic": -5,
-                "academic": 15
+                "charisma": -10,
+                "athletic ability": -5,
+                "smartness": 15
             }
         },
         {
             "response": "The football team.",
             "stats": {
-                "social": 5,
-                "athletic": 10,
-                "academic": -5
+                "charisma": 5,
+                "athletic ability": 10,
+                "smartness": -5
             }
         },
         {
             "response": "The popular kids",
             "stats": {
-                "social": 15,
-                "athletic": 0,
-                "academic": 0
+                "charisma": 15,
+                "athletic ability": 0,
+                "smartness": 0
             }
         }
     ]

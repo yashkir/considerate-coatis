@@ -12,7 +12,7 @@ class GameScreen(urwid.LineBox):
         self.text = urwid.Text("placeholder")
         self.fill = urwid.Filler(self.text, 'top')
         self.stats_box = urwid.LineBox(
-            urwid.Filler(self.state_manager.player.stats.stat_list_text, 'middle'), title="stats")
+            urwid.Filler(self.state_manager.player_stats.stat_list_text, 'middle'), title="stats")
         self.location_box = urwid.LineBox(self.fill, title="location")
         self.situation_text = urwid.Text(self.situation_manager.current_situation.get_prompt(), align=CENTER)
         self.event_box = urwid.LineBox(urwid.Filler(self.situation_text, 'middle'), title="event")
@@ -21,8 +21,12 @@ class GameScreen(urwid.LineBox):
         self.button_width = 20
         self.button_one = urwid.Button("quit", lambda _: self._emit('quit'))
         self.button_two = urwid.Button("Restart", lambda _: self._emit('restart'))
+        self.button_three = urwid.Button("help", lambda _: self._emit('help'))
+        self.button_four = urwid.Button("save", lambda _: self._emit('save'))
         self.button_columns = urwid.Filler(
-            urwid.GridFlow([self.button_one, self.button_two], self.button_width, 2, 1, 'center'))
+            urwid.GridFlow(
+                [self.button_one, self.button_two, self.button_three, self.button_four],
+                self.button_width, 2, 1, 'center'))
         self.button_box = urwid.LineBox(self.button_columns, title="buttons")
         self.choice_count = 0
 
@@ -32,18 +36,23 @@ class GameScreen(urwid.LineBox):
             ('weight', 1.5, self.top_columns), ('weight', 2, self.event_box), ('weight', 3, self.button_box)])
         super().__init__(self.pile, title="Game Screen")
 
+    def game_over(self):
+        """This is the call that the state manager makes when the game is over"""
+        self._emit("game over")
+
     def update_text(self):
         """Where all the text will be updated"""
         self.situation_text.set_text(self.situation_manager.current_situation.get_prompt())
-        self.state_manager.player.stats.update_text()
+        self.state_manager.player_stats.update_text()
 
     def update_buttons(self, response_list):
         """Where the buttons will be updated"""
-        self.button_columns.base_widget._set_focus_position(0)
         list_buttons = []
 
-        list_buttons.append((self.button_one, ('given', self.button_width)))
-        list_buttons.append((self.button_two, ('given', self.button_width)))
+        list_buttons.append((self.button_one, ('given', 10)))
+        list_buttons.append((self.button_two, ('given', 11)))
+        list_buttons.append((self.button_three, ('given', 10)))
+        list_buttons.append((self.button_four, ('given', 10)))
 
         for r in range(len(response_list)):
             list_buttons.append((
@@ -68,4 +77,4 @@ class GameScreen(urwid.LineBox):
         self._emit('choice', choice_text)
 
 
-urwid.register_signal(GameScreen, ['quit', 'restart', 'help', 'choice'])
+urwid.register_signal(GameScreen, ['quit', 'restart', 'help', 'choice', 'save', 'game over'])
