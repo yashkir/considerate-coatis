@@ -36,6 +36,9 @@ class GameController():
         urwid.connect_signal(self.new_game_screen, 'load', self.__show_state_manager_screen)
         urwid.connect_signal(self.new_game_screen, 'help', self.__show_help_screen)
 
+        urwid.connect_signal(self.difficulty_screen, 'quit', self.__quit)
+        urwid.connect_signal(self.difficulty_screen, 'chosen difficulty', self.__set_difficulty)
+
         urwid.connect_signal(self.restart_game_screen, 'restart', self.__restart)
         urwid.connect_signal(self.restart_game_screen, 'go back', self.__show_game_screen)
         urwid.connect_signal(self.restart_game_screen, 'quit', self.__quit)
@@ -61,9 +64,6 @@ class GameController():
         urwid.connect_signal(self.save_screen, 'save', self.__save)
 
         urwid.connect_signal(self.win_screen, 'quit', self.__quit)
-
-        urwid.connect_signal(self.difficulty_screen, 'quit', self.__quit)
-        urwid.connect_signal(self.difficulty_screen, 'easy', self.__set_difficulty)
 
         # Set up background and overlay
         self.background = urwid.AttrMap(urwid.SolidFill('.'), 'background')
