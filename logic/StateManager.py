@@ -54,22 +54,25 @@ class StateManager():
 
     def apply_stats(self, response):
         """Apply the chosen option's stats to the player"""
-        self.player_stats.sus_int, self.player_stats.sad_int = 0, 0
-
         self.stats = self.game.situation_manager.current_situation.get_option_stats(int(response[0])-1)
         cur_stats = self.player_stats.stat_dict
 
-        for stat, value in self.state[0]['player']['stats'].items():
-            if stat == 'wisdom':
-                continue
-            if value - 50 > 0:
-                self.player_stats.sus_int += value - 50
-            elif value - 50 < 0:
-                self.player_stats.sad_int += (value - 50) * -1
-
+        for stat, value in self.stats.items():
             # add the chosen option's stats
             cur_stats[stat] += self.stats[stat]
             self.state[0]['player']['stats'][stat] = self.player_stats.stat_dict[stat]
+
+        for stat, value in self.state[0]['player']['stats'].items():
+            if value > 50:
+                self.player_stats.sus_int += value - 50
+                self.player_stats.sad_int -= value - 50
+            elif value < 50:
+                self.player_stats.sad_int += (value - 50) * -1
+                self.player_stats.sus_int -= (value - 50) * -1
+            if self.player_stats.sad_int < 0:
+                self.player_stats.sad_int = 0
+            if self.player_stats.sus_int < 0:
+                self.player_stats.sus_int = 0
 
         if self.player_stats.sus_int > 50 or self.player_stats.sad_int > 50:
             self.game.game_screen.game_over()

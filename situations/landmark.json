@@ -1,186 +1,186 @@
 [
-   {
-      "prompt":"It's your first day of school! Who will you sit with?",
-      "options":[
-         {
-            "response":"The nerds.",
-            "stats":{
-               "charisma":-10,
-               "athletic ability":-5,
-               "smartness":15
+    {
+        "prompt": "It's your first day of school! Who will you sit with?",
+        "options": [
+            {
+                "response": "The nerds.",
+                "stats": {
+                    "charisma": -10,
+                    "athletic ability": -5,
+                    "smartness": 15
+                }
+            },
+            {
+                "response": "The football team.",
+                "stats": {
+                    "charisma": 5,
+                    "athletic ability": 10,
+                    "smartness": -5
+                }
+            },
+            {
+                "response": "The popular kids.",
+                "stats": {
+                    "charisma": 15,
+                    "athletic ability": 0,
+                    "smartness": 0
+                }
             }
-         },
-         {
-            "response":"The football team.",
-            "stats":{
-               "charisma":5,
-               "athletic ability":10,
-               "smartness":-5
+        ]
+    },
+    {
+        "prompt": "The government is coming to take tests, what do you do?",
+        "options": [
+            {
+                "response": "Don't show up.",
+                "stats": {
+                    "charisma": -10,
+                    "athletic ability": 0,
+                    "smartness": 0
+                }
+            },
+            {
+                "response": "Show up but do terribly.",
+                "stats": {
+                    "charisma": -5,
+                    "athletic ability": -4,
+                    "smartness": 0
+                }
+            },
+            {
+                "response": "Show up and do really well.",
+                "stats": {
+                    "charisma": 5,
+                    "athletic ability": 5,
+                    "smartness": -5
+                }
             }
-         },
-         {
-            "response":"The popular kids.",
-            "stats":{
-               "charisma":15,
-               "athletic ability":0,
-               "smartness":0
+        ]
+    },
+    {
+        "prompt": "A bully pushes you into a corner and asks for your lunch money.",
+        "options": [
+            {
+                "response": "Punch them.",
+                "stats": {
+                    "charisma": 5,
+                    "athletic ability": 10,
+                    "smartness": -10
+                }
+            },
+            {
+                "response": "Run.",
+                "stats": {
+                    "charisma": -5,
+                    "athletic ability": 10,
+                    "smartness": 5
+                }
+            },
+            {
+                "response": "Call for an responsible adult.",
+                "stats": {
+                    "charisma": -5,
+                    "athletic ability": 0,
+                    "smartness": 10
+                }
             }
-         }
-      ]
-   },
-   {
-      "prompt":"The government is coming to take tests, what do you do?",
-      "options":[
-         {
-            "response":"Don't show up.",
-            "stats":{
-               "charisma":-10,
-               "athletic ability":0,
-               "smartness":0
+        ]
+    },
+    {
+        "prompt": "Your midterms have arrived but due to a crazy sale on pizza your classmates are out partying.",
+        "options": [
+            {
+                "response": "Study for the midterms.",
+                "stats": {
+                    "charisma": -10,
+                    "athletic ability": -5,
+                    "smartness": 15
+                }
+            },
+            {
+                "response": "Party.",
+                "stats": {
+                    "charisma": 10,
+                    "athletic ability": 5,
+                    "smartness": -15
+                }
             }
-         },
-         {
-            "response":"Show up but do terribly.",
-            "stats":{
-               "charisma":-5,
-               "athletic ability":-4,
-               "smartness":0
+        ]
+    },
+    {
+        "prompt": "The school is hosting a post-midterm festival. Each class must come up something fun or interesting to do. Your class has chosen you to be their representative!",
+        "options": [
+            {
+                "response": "A Haunted House",
+                "stats": {
+                    "charisma": 5,
+                    "athletic ability": 10,
+                    "smartness": -5
+                }
+            },
+            {
+                "response": "A Bazaar",
+                "stats": {
+                    "charisma": -5,
+                    "atheltic ablity": 0,
+                    "smartness": 10
+                }
             }
-         },
-         {
-            "response":"Show up and do really well.",
-            "stats":{
-               "charisma":5,
-               "athletic ability":5,
-               "smartness":-5
+        ]
+    },
+    {
+        "prompt": "It's spring break now and people are leaving town to visit family. You decide to use your time to do something other than sleeping.",
+        "options": [
+            {
+                "response": "Join a game of basketball.",
+                "stats": {
+                    "charisma": 2,
+                    "athletic ability": 7,
+                    "smartness": 0
+                }
+            },
+            {
+                "response": "Watch TV.",
+                "stats": {
+                    "charisma": 0,
+                    "athletic ability": 0,
+                    "smartness": -3
+                }
             }
-         },
-         {
-            "prompt":"A bully pushes you into a corner and asks for your lunch money.",
-            "options":[
-               {
-                  "response":"Punch them.",
-                  "stats":{
-                     "charisma":5,
-                     "athletic ablity":10,
-                     "smartness":-10
-                  }
-               },
-               {
-                  "response":"Run.",
-                  "stats":{
-                     "charisma":-5,
-                     "athletic ablity":10,
-                     "smartness":5
-                  }
-               },
-               {
-                  "response":"Call for an responsible adult.",
-                  "stats":{
-                     "charisma":-5,
-                     "athletic ablity":0,
-                     "smartness":10
-                  }
-               }
-            ]
-         },
-         {
-            "prompt":"Your midterms have arrived but due to a crazy sale on pizza your classmates are out partying.",
-            "options":[
-               {
-                  "response":"Study for the midterms.",
-                  "stats":{
-                     "charisma":-10,
-                     "athletic ablity":-5,
-                     "smartness":15
-                  }
-               },
-               {
-                  "response":"Party.",
-                  "stats":{
-                     "charisma":10,
-                     "athletic ablity":5,
-                     "smartness":-15
-                  }
-               }
-            ]
-         },
-         {
-            "prompt":"The school is hosting a post-midterm festival. Each class must come up something fun or interesting to do. Your class has chosen you to be their representative!",
-            "options":[
-               {
-                  "response":"A Haunted House",
-                  "stats":{
-                     "charisma":5,
-                     "athletic ablity":10,
-                     "smartness":-5
-                  }
-               },
-               {
-                  "response":"A Bazaar",
-                   "stats":{
-                       "charisma":-5,
-                       "atheltic ablity":0,
-                       "smartness":10
-                   }
-               }
-            ]
-         },
-         {
-            "prompt":"It's spring break now and people are leaving town to visit family. You decide to use your time to do something other than sleeping.",
-            "options":[
-               {
-                  "response":"Join a game of basketball.",
-                  "stats":{
-                     "charisma":2,
-                     "athletic ablity":7,
-                     "smartness":0
-                  }
-               },
-               {
-                  "response":"Watch TV.",
-                  "stats":{
-                     "charisma":0,
-                     "athletic ablity":0,
-                     "smartness":-3
-                  }
-               }
-            ]
-         },
-         {
-            "prompt":"Finals have arrived.",
-            "options":[
-               {
-                  "response":"Study for finals.",
-                  "stats":{
-                     "charisma":-5,
-                     "athletic ablity":-5,
-                     "smartness":10
-                  }
-               },
-               {
-                  "response":"Play a new RPG game!",
-                  "stats":{
-                     "charisma":-5,
-                     "athletic ablity":-3,
-                     "smartness":4
-                  }
-               }
-            ]
-         },
-         {
-            "prompt":"The school year is over!",
-            "options":[
-               {
-                  "response":"You've won, congrats!",
-                  "stats":{
-                     "charisma":0,
-                     "athletic ablity":0,
-                     "smartness":0
-                  }
-               }
-            ]
-         }
-      ]
-   }
+        ]
+    },
+    {
+        "prompt": "Finals have arrived.",
+        "options": [
+            {
+                "response": "Study for finals.",
+                "stats": {
+                    "charisma": -5,
+                    "athletic ability": -5,
+                    "smartness": 10
+                }
+            },
+            {
+                "response": "Play a new RPG game!",
+                "stats": {
+                    "charisma": -5,
+                    "athletic ability": -3,
+                    "smartness": 4
+                }
+            }
+        ]
+    },
+    {
+        "prompt": "The school year is over!",
+        "options": [
+            {
+                "response": "You've won, congrats!",
+                "stats": {
+                    "charisma": 0,
+                    "athletic ability": 0,
+                    "smartness": 0
+                }
+            }
+        ]
+    }
 ]

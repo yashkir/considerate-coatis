@@ -6,6 +6,7 @@ class NewGameScreen(urwid.LineBox):
 
     def __init__(self):
         text = urwid.Filler(urwid.Text("Welcome, would you like to start a new game?", 'center'), 'middle')
+
         button_yes = urwid.Button("YES", self.__start_game)
         button_no = urwid.Button("NO", self.__quit)
         button_load = urwid.Button("LOAD", self.__load)

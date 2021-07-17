@@ -2,6 +2,7 @@ import urwid
 
 from logic.SituationManager import SituationManager
 from logic.StateManager import StateManager
+from screens.difficulty_screen import DifficultyScreen
 from screens.game_over_screen import GameOverScreen
 from screens.game_screen import GameScreen
 from screens.help_screen import HelpScreen
@@ -18,6 +19,7 @@ class GameController():
 
     def __init__(self):
         self.new_game_screen = NewGameScreen()
+        self.difficulty_screen = DifficultyScreen()
         self.restart_game_screen = RestartGameScreen()
         self.help_screen = HelpScreen()
         self.situation_manager = SituationManager()
@@ -33,6 +35,9 @@ class GameController():
         urwid.connect_signal(self.new_game_screen, 'quit', self.__quit)
         urwid.connect_signal(self.new_game_screen, 'load', self.__show_state_manager_screen)
         urwid.connect_signal(self.new_game_screen, 'help', self.__show_help_screen)
+
+        urwid.connect_signal(self.difficulty_screen, 'quit', self.__quit)
+        urwid.connect_signal(self.difficulty_screen, 'chosen difficulty', self.__set_difficulty)
 
         urwid.connect_signal(self.restart_game_screen, 'restart', self.__restart)
         urwid.connect_signal(self.restart_game_screen, 'go back', self.__show_game_screen)
@@ -74,12 +79,16 @@ class GameController():
     # Game Flow Methods
 
     def __start(self, signal_emitter=None):
-        self.game_screen.update_buttons(self.situation_manager.current_situation.get_option_response())
-        self.game_screen.update_text()
-        self.__show_game_screen()
+        self.__show_difficulty_screen()
 
     def __consequence(self, signal_emitter=None, choice=""):
         self.state_manager.apply_stats(choice)
+
+    def __set_difficulty(self, signal_emitter=None, choice=""):
+        self.state_manager.state[0]["difficulty"] = choice
+        self.game_screen.update_buttons(self.situation_manager.current_situation.get_option_response())
+        self.game_screen.update_text()
+        self.__show_game_screen()
 
     def __quit(self, signal_emitter=None):
         raise urwid.ExitMainLoop()
@@ -126,6 +135,9 @@ class GameController():
 
     def __show_win_screen(self, signal_emitter=None):
         self.__set_overlay(self.win_screen)
+
+    def __show_difficulty_screen(self, signal_emitter=None):
+        self.__set_overlay(self.difficulty_screen)
 
     # Overlay methods
 

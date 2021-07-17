@@ -11,6 +11,7 @@
         }
     },
     "location_id": 1,
-    "situation_id": 0
+    "situation_id": 0,
+    "difficulty": "EASY"
 }
 ]
