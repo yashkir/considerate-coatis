@@ -67,13 +67,14 @@ class GameController():
 
         # Set up background and overlay
         self.background = urwid.AttrMap(urwid.SolidFill('.'), 'background')
-        self.overlay = urwid.Overlay(self.new_game_screen, self.background,
-                                     'center', OVERLAY_WIDTH, 'middle', OVERLAY_HEIGHT)
 
         # Start the MainLoop
-        self.loop = urwid.MainLoop(self.overlay, PALETTE)
+        self.loop = urwid.MainLoop('', PALETTE)
         self.loop.screen.set_terminal_properties(colors=PALETTE_COLORS)
+
+        self.__set_overlay(self.new_game_screen)
         self.prev = self.loop.widget
+
         self.loop.run()
 
     # Game Flow Methods
