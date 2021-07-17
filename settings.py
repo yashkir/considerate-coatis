@@ -8,5 +8,6 @@ PALETTE = [
     ('button', '', '', '', '#000000,bold', BACKGROUND),
     ('highlight', '', '', '', '#ffa', BACKGROUND),
     ('faded', '', '', '', '#888', BACKGROUND),
+    ('warning', '', '', '', '#FFFFFF,bold', '#A00'),
     ('background', '', '', '', '#00f', '#006'),
 ]
