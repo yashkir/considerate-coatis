@@ -22,6 +22,7 @@ class SituationManager():
             data = self.situations_cannon[id]
         # Get the data for a landmark situation
         elif self.situation_counter >= 5:
+            self.situation_counter = 0
             data = self.situations_cannon[id]
 
         # Get the data for a normal situation
@@ -30,8 +31,6 @@ class SituationManager():
 
         # Set the current situation to a new one
         self.current_situation = Situation(**data)
-        if self.situation_counter >= 5:
-            self.situation_counter = 0
         self.situation_counter += 1
 
     def get_situation(self) -> Situation:

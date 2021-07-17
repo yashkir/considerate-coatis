@@ -42,8 +42,8 @@ class make_situation:
         charisma = input("charisma: ")
         self.file.write(f'"charisma": {charisma}, ')
 
-        athletic_ablity = input("athletic ablity: ")
-        self.file.write(f'"athletic ablity": {athletic_ablity}, ')
+        athletic_ablity = input("athletic ability: ")
+        self.file.write(f'"athletic ability": {athletic_ablity}, ')
 
         smartness = input("smartness: ")
         self.file.write(f'"smartness": {smartness}')
