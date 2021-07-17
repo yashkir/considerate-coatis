@@ -2,6 +2,7 @@ import urwid
 
 from logic.SituationManager import SituationManager
 from logic.StateManager import StateManager
+from screens.difficulty_screen import DifficultyScreen
 from screens.game_over_screen import GameOverScreen
 from screens.game_screen import GameScreen
 from screens.help_screen import HelpScreen
@@ -18,6 +19,7 @@ class GameController():
 
     def __init__(self):
         self.new_game_screen = NewGameScreen()
+        self.difficulty_screen = DifficultyScreen()
         self.restart_game_screen = RestartGameScreen()
         self.help_screen = HelpScreen()
         self.situation_manager = SituationManager()
@@ -60,6 +62,9 @@ class GameController():
 
         urwid.connect_signal(self.win_screen, 'quit', self.__quit)
 
+        urwid.connect_signal(self.difficulty_screen, 'quit', self.__quit)
+        urwid.connect_signal(self.difficulty_screen, 'easy', self.__set_difficulty)
+
         # Set up background and overlay
         self.background = urwid.AttrMap(urwid.SolidFill('.'), 'background')
         self.overlay = urwid.Overlay(self.new_game_screen, self.background,
@@ -74,12 +79,16 @@ class GameController():
     # Game Flow Methods
 
     def __start(self, signal_emitter=None):
-        self.game_screen.update_buttons(self.situation_manager.current_situation.get_option_response())
-        self.game_screen.update_text()
-        self.__show_game_screen()
+        self.__show_difficulty_screen()
+        # self.game_screen.update_buttons(self.situation_manager.current_situation.get_option_response())
+        # self.game_screen.update_text()
+        # self.__show_game_screen()
 
     def __consequence(self, signal_emitter=None, choice=""):
         self.state_manager.apply_stats(choice)
+
+    def __set_difficulty(self, signal_emitter=None, choice=""):
+        self.state_manager.state[0]["difficulty"] = choice
 
     def __quit(self, signal_emitter=None):
         raise urwid.ExitMainLoop()
@@ -126,6 +135,9 @@ class GameController():
 
     def __show_win_screen(self, signal_emitter=None):
         self.__set_overlay(self.win_screen)
+
+    def __show_difficulty_screen(self, signal_emitter=None):
+        self.__set_overlay(self.difficulty_screen)
 
     # Overlay methods
 
