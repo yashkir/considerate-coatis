@@ -1,95 +1,270 @@
 [
-    {
-        "prompt": "You can either study for the upcoming test, or rest for the upcoming race.",
-        "options": [
-            {
-                "response": "I will study for the test.",
-                "stats": {
-                    "charisma": -10,
-                    "athletic ability": -10,
-                    "smartness": 10
-                }
-            },
-            {
-                "response": "I will rest for the race.",
-                "stats": {
-                    "charisma": 10,
-                    "athletic ability": 5,
-                    "smartness": -5
-                }
+   {
+      "prompt":"You can either study for the upcoming test, or rest for the upcoming race.",
+      "options":[
+         {
+            "response":"I will study for the test.",
+            "stats":{
+               "charisma":-10,
+               "athletic ability":-10,
+               "smartness":10
             }
-        ]
-    },
-    {
-        "prompt": "you are invited to play dnd with the nerds but also invited to play football with the jocks, which one do you chose?",
-        "options": [
-            {
-                "response": "nerds",
-                "stats": {
-                    "charisma": -10,
-                    "athletic ability": -10,
-                    "smartness": 10
-                }
-            },
-            {
-                "response": "jocks",
-                "stats": {
-                    "charisma": 10,
-                    "athletic ability": 10,
-                    "smartness": -10
-                }
+         },
+         {
+            "response":"I will rest for the race.",
+            "stats":{
+               "charisma":10,
+               "athletic ability":5,
+               "smartness":-5
             }
-        ]
-    },
-    {
-        "prompt": "The popular kids invite you to a party but you have a test tomorrow",
-        "options": [
-            {
-                "response": "go to the party",
-                "stats": {
-                    "charisma": 10,
-                    "athletic ability": 4,
-                    "smartness": -10
-                }
-            },
-            {
-                "response": "study",
-                "stats": {
-                    "charisma": -7,
-                    "athletic ability": -4,
-                    "smartness": 10
-                }
+         }
+      ]
+   },
+   {
+      "prompt":"you are invited to play dnd with the nerds but also invited to play football with the jocks, which one do you chose?",
+      "options":[
+         {
+            "response":"nerds",
+            "stats":{
+               "charisma":-10,
+               "athletic ability":-10,
+               "smartness":10
             }
-        ]
-    },
-    {
-        "prompt": "a girl asks you out and you declined it now the girl is sad, what do you do?",
-        "options": [
-            {
-                "response": "make her feel better",
-                "stats": {
-                    "charisma": 10,
-                    "athletic ability": -4,
-                    "smartness": -8
-                }
-            },
-            {
-                "response": "ignore it",
-                "stats": {
-                    "charisma": -10,
-                    "athletic ability": 0,
-                    "smartness": 0
-                }
-            },
-
-{"prompt": "Some jocks invited you to have lunch with them", "options": [ {"response": "I will eat with them", "stats": {"charisma": 5, "athletic ablity": 10, "smartness": -10}},{"response": "I won't eat with them", "stats": {"charisma": -5, "athletic ablity": -5, "smartness": 10}}]},
-{"prompt": "A friend invites you over for a sleepover the night before a test", "options": [ {"response": "Sleepover!", "stats": {"charisma": 10, "athletic ablity": 0, "smartness": 0}},{"response": "reject their offer", "stats": {"charisma": -10, "athletic ablity": 0, "smartness": 5}}]},
-{"prompt": "You get asked out ~nice~!", "options": [ {"response": "reject them", "stats": {"charisma": -10, "athletic ablity": 0, "smartness": -5}},{"response": "go on a date!", "stats": {"charisma": 10, "athletic ablity": 0, "smartness": 0}}]},
-{"prompt": "Some geeks ask you game with them while some jocks ask you to hangout", "options": [ {"response": "game with the geeks", "stats": {"charisma": -10, "athletic ablity": -5, "smartness": 10}},{"response": "hang with the jocks", "stats": {"charisma": 10, "athletic ablity": 5, "smartness": -10}}]},
-{"prompt": "You accidentally bump into one of the popular girls", "options": [ {"response": "apologize", "stats": {"charisma": 0, "athletic ablity": 0, "smartness": 1}},{"response": "ask her out", "stats": {"charisma": -10, "athletic ablity": 0, "smartness": -10}},{"response": "run away", "stats": {"charisma": -5, "athletic ablity": 5, "smartness": -5}}]},
-{"prompt": "during astrology class someone says aliens don't exist", "options": [ {"response": "prove them wrong.", "stats": {"charisma": -100, "athletic ablity": -100, "smartness": -100}},{"response": "argue with them", "stats": {"charisma": -5, "athletic ablity": 0, "smartness": 5}},{"response": "say nothing", "stats": {"charisma": 0, "athletic ablity": 0, "smartness": 0}}]},
-{"prompt": "you walk up to a vending machine to get a drink", "options": [ {"response": "drink soda", "stats": {"charisma": 0, "athletic ablity": -5, "smartness": 0}},{"response": "drink water", "stats": {"charisma": 0, "athletic ablity": 5, "smartness": 0}}]},
-{"prompt": "you sit down next to one of the popular kids on the bus", "options": [ {"response": "say nothing", "stats": {"charisma": -5, "athletic ablity": 0, "smartness": 0}},{"response": "tell a joke", "stats": {"charisma": 10, "athletic ablity": 0, "smartness": 0}}]}
-        ]
-    }
+         },
+         {
+            "response":"jocks",
+            "stats":{
+               "charisma":10,
+               "athletic ability":10,
+               "smartness":-10
+            }
+         }
+      ]
+   },
+   {
+      "prompt":"The popular kids invite you to a party but you have a test tomorrow",
+      "options":[
+         {
+            "response":"go to the party",
+            "stats":{
+               "charisma":10,
+               "athletic ability":4,
+               "smartness":-10
+            }
+         },
+         {
+            "response":"study",
+            "stats":{
+               "charisma":-7,
+               "athletic ability":-4,
+               "smartness":10
+            }
+         }
+      ]
+   },
+   {
+      "prompt":"a girl asks you out and you declined it now the girl is sad, what do you do?",
+      "options":[
+         {
+            "response":"make her feel better",
+            "stats":{
+               "charisma":10,
+               "athletic ability":-4,
+               "smartness":-8
+            }
+         },
+         {
+            "response":"ignore it",
+            "stats":{
+               "charisma":-10,
+               "athletic ability":0,
+               "smartness":0
+            }
+         }
+      ]
+   },
+   {
+      "prompt":"Some jocks invited you to have lunch with them",
+      "options":[
+         {
+            "response":"I will eat with them",
+            "stats":{
+               "charisma":5,
+               "athletic ablity":10,
+               "smartness":-10
+            }
+         },
+         {
+            "response":"I won't eat with them",
+            "stats":{
+               "charisma":-5,
+               "athletic ablity":-5,
+               "smartness":10
+            }
+         }
+      ]
+   },
+   {
+      "prompt":"A friend invites you over for a sleepover the night before a test",
+      "options":[
+         {
+            "response":"Sleepover!",
+            "stats":{
+               "charisma":10,
+               "athletic ablity":0,
+               "smartness":0
+            }
+         },
+         {
+            "response":"reject their offer",
+            "stats":{
+               "charisma":-10,
+               "athletic ablity":0,
+               "smartness":5
+            }
+         }
+      ]
+   },
+   {
+      "prompt":"You get asked out ~nice~!",
+      "options":[
+         {
+            "response":"reject them",
+            "stats":{
+               "charisma":-10,
+               "athletic ablity":0,
+               "smartness":-5
+            }
+         },
+         {
+            "response":"go on a date!",
+            "stats":{
+               "charisma":10,
+               "athletic ablity":0,
+               "smartness":0
+            }
+         }
+      ]
+   },
+   {
+      "prompt":"Some geeks ask you game with them while some jocks ask you to hangout",
+      "options":[
+         {
+            "response":"game with the geeks",
+            "stats":{
+               "charisma":-10,
+               "athletic ablity":-5,
+               "smartness":10
+            }
+         },
+         {
+            "response":"hang with the jocks",
+            "stats":{
+               "charisma":10,
+               "athletic ablity":5,
+               "smartness":-10
+            }
+         }
+      ]
+   },
+   {
+      "prompt":"You accidentally bump into one of the popular girls",
+      "options":[
+         {
+            "response":"apologize",
+            "stats":{
+               "charisma":0,
+               "athletic ablity":0,
+               "smartness":1
+            }
+         },
+         {
+            "response":"ask her out",
+            "stats":{
+               "charisma":-10,
+               "athletic ablity":0,
+               "smartness":-10
+            }
+         },
+         {
+            "response":"run away",
+            "stats":{
+               "charisma":-5,
+               "athletic ablity":5,
+               "smartness":-5
+            }
+         }
+      ]
+   },
+   {
+      "prompt":"during astrology class someone says aliens don't exist",
+      "options":[
+         {
+            "response":"prove them wrong.",
+            "stats":{
+               "charisma":-100,
+               "athletic ablity":-100,
+               "smartness":-100
+            }
+         },
+         {
+            "response":"argue with them",
+            "stats":{
+               "charisma":-5,
+               "athletic ablity":0,
+               "smartness":5
+            }
+         },
+         {
+            "response":"say nothing",
+            "stats":{
+               "charisma":0,
+               "athletic ablity":0,
+               "smartness":0
+            }
+         }
+      ]
+   },
+   {
+      "prompt":"you walk up to a vending machine to get a drink",
+      "options":[
+         {
+            "response":"drink soda",
+            "stats":{
+               "charisma":0,
+               "athletic ablity":-5,
+               "smartness":0
+            }
+         },
+         {
+            "response":"drink water",
+            "stats":{
+               "charisma":0,
+               "athletic ablity":5,
+               "smartness":0
+            }
+         }
+      ]
+   },
+   {
+      "prompt":"you sit down next to one of the popular kids on the bus",
+      "options":[
+         {
+            "response":"say nothing",
+            "stats":{
+               "charisma":-5,
+               "athletic ablity":0,
+               "smartness":0
+            }
+         },
+         {
+            "response":"tell a joke",
+            "stats":{
+               "charisma":10,
+               "athletic ablity":0,
+               "smartness":0
+            }
+         }
+      ]
+   }
 ]
