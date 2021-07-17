@@ -54,7 +54,13 @@
                 "athletic ability": 5,
                 "smartness": -5
             }
-        }
+        },
+        {"prompt": "a bully pushes you into a corner and asks for your lunch money", "options": [ {"response": "punch them", "stats": {"charisma": 5, "athletic ablity": 10, "smartness": -10}},{"response": "run", "stats": {"charisma": -5, "athletic ablity": 10, "smartness": 5}},{"response": "call for a responsible adult", "stats": {"charisma": -5, "athletic ablity": 0, "smartness": 10}}]},
+{"prompt": "your midterms have arrived but due to a crazy sale on pizza your classmates are out partying", "options": [ {"response": "study for the midterms", "stats": {"charisma": -10, "athletic ablity": -5, "smartness": 15}},{"response": "party", "stats": {"charisma": 10, "athletic ablity": 5, "smartness": -15}}]},
+{"prompt": "the school is hosting a post-midterm festival. each class must come up something fun or interesting to do. your class has elected you as representative", "options": [ {"response": "haunted house", "stats": {"charisma": 5, "athletic ablity": 10, "smartness": -5}}]},
+{"prompt": "its spring break now and people are leaving town to visit family. you decide to use your time to do something", "options": [ {"response": "join a game of basketball", "stats": {"charisma": 2, "athletic ablity": 7, "smartness": 0}},{"response": "watch tv", "stats": {"charisma": 0, "athletic ablity": 0, "smartness": -3}}]},
+{"prompt": "finals have arrived.", "options": [ {"response": "study", "stats": {"charisma": -5, "athletic ablity": -5, "smartness": 10}},{"response": "play a new rpg", "stats": {"charisma": -5, "athletic ablity": -3, "smartness": 4}}]},
+{"prompt": "the school year is over", "options": [ {"response": "you've won, congrats", "stats": {"charisma": 0, "athletic ablity": 0, "smartness": 0}}]}
     ]
 }
 ]
