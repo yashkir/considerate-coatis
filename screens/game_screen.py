@@ -18,16 +18,17 @@ class GameScreen(urwid.LineBox):
         self.event_box = urwid.LineBox(urwid.Filler(self.situation_text, 'middle'), title="event")
 
         # buttons
-        self.button_width = 20
+        self.button_width = 15
         self.button_one = urwid.Button("quit", lambda _: self._emit('quit'))
-        self.button_two = urwid.Button("Restart", lambda _: self._emit('restart'))
+        self.button_two = urwid.Button("restart", lambda _: self._emit('restart'))
         self.button_three = urwid.Button("help", lambda _: self._emit('help'))
         self.button_four = urwid.Button("save", lambda _: self._emit('save'))
         self.option_button_pile = urwid.Pile([])
-        self.button_columns = urwid.Filler(
-            urwid.GridFlow(
-                [self.button_one, self.button_two, self.button_three, self.button_four],
-                self.button_width, 2, 1, 'center'))
+        self.button_columns = urwid.AttrMap(
+            urwid.Filler(
+                urwid.GridFlow(
+                    [self.button_one, self.button_two, self.button_three, self.button_four],
+                    self.button_width, 2, 1, 'center')), 'button')
         self.button_box = urwid.LineBox(
             urwid.Pile([('weight', 1, self.option_button_pile),
                         ('weight', 1, self.button_columns)]),
@@ -61,7 +62,7 @@ class GameScreen(urwid.LineBox):
         for r in range(len(response_list)):
             button_markup = [
                 (
-                    '',
+                    'button',
                     str(r+1)
                     + ': '
                     + str(response_list[r])
