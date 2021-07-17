@@ -27,7 +27,10 @@ class SituationManager():
 
         # Get the data for a normal situation
         else:
+            before_data = self.current_situation
             data = self.situations_normal[random.randint(0, len(self.situations_normal)-1)]
+            if before_data == Situation(**data):
+                self.load_situation(id)
 
         # Set the current situation to a new one
         self.current_situation = Situation(**data)

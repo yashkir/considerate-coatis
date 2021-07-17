@@ -58,14 +58,21 @@ class StateManager():
         cur_stats = self.player_stats.stat_dict
 
         for stat, value in self.stats.items():
-            if value > 0:
-                self.player_stats.sus_int += value
-            elif value < 0:
-                self.player_stats.sad_int += value * -1
-
             # add the chosen option's stats
             cur_stats[stat] += self.stats[stat]
             self.state[0]['player']['stats'][stat] = self.player_stats.stat_dict[stat]
+
+        for stat, value in self.state[0]['player']['stats'].items():
+            if value > 50:
+                self.player_stats.sus_int += value - 50
+                self.player_stats.sad_int -= value - 50
+            elif value < 50:
+                self.player_stats.sad_int += (value - 50) * -1
+                self.player_stats.sus_int -= (value - 50) * -1
+            if self.player_stats.sad_int < 0:
+                self.player_stats.sad_int = 0
+            if self.player_stats.sus_int < 0:
+                self.player_stats.sus_int = 0
 
         if self.player_stats.sus_int > 50 or self.player_stats.sad_int > 50:
             self.game.game_screen.game_over()
