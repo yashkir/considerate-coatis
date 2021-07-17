@@ -23,11 +23,15 @@ class GameScreen(urwid.LineBox):
         self.button_two = urwid.Button("Restart", lambda _: self._emit('restart'))
         self.button_three = urwid.Button("help", lambda _: self._emit('help'))
         self.button_four = urwid.Button("save", lambda _: self._emit('save'))
+        self.option_button_pile = urwid.Pile([])
         self.button_columns = urwid.Filler(
             urwid.GridFlow(
                 [self.button_one, self.button_two, self.button_three, self.button_four],
                 self.button_width, 2, 1, 'center'))
-        self.button_box = urwid.LineBox(self.button_columns, title="buttons")
+        self.button_box = urwid.LineBox(
+            urwid.Pile([('weight', 1, self.option_button_pile),
+                        ('weight', 1, self.button_columns)]),
+            title="Controls")
         self.choice_count = 0
 
         # Arrange a pile with two columns on top and events on bottom
@@ -53,19 +57,26 @@ class GameScreen(urwid.LineBox):
         """Where the buttons will be updated"""
         list_buttons = []
 
-        list_buttons.append((self.button_one, ('given', 10)))
-        list_buttons.append((self.button_two, ('given', 11)))
-        list_buttons.append((self.button_three, ('given', 10)))
-        list_buttons.append((self.button_four, ('given', 10)))
-
+        # Load the buttons for the situation
         for r in range(len(response_list)):
-            list_buttons.append((
-                urwid.Button(
-                    str(r+1) + ' ' + str(response_list[r])
-                    + self.situation_manager.current_situation.get_option_stats_str(r),
-                    self.__choice), ('given', self.button_width)))
+            button_markup = [
+                (
+                    '',
+                    str(r+1)
+                    + ': '
+                    + str(response_list[r])
+                    + '\n'
+                ), (
+                    'faded',
+                    self.situation_manager.current_situation.get_option_stats_str(r)
+                )]
 
-        self.button_columns.base_widget.contents = list_buttons
+            button = urwid.Button(button_markup, self.__choice)
+            filler = urwid.Filler(button, 'top')
+
+            list_buttons.append((filler, ('weight', 1)))
+
+        self.option_button_pile.contents = list_buttons
 
     def keypress(self, size, key):
         """Handle q for quitting and Keypress to get to Help Screen"""
