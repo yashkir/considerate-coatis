@@ -1,6 +1,16 @@
 import urwid
 from urwid.widget import CENTER
 
+SCHOOL = (
+    "    _____________       |##          \n" + # noqa: CODE
+    "^  |.......O....|       |            \n" + # noqa: CODE
+    "|^ |..[]..[ ]...----------- . . . .  \n" + # noqa: CODE
+    " | |............|..[__]...| .  . .   \n" + # noqa: CODE
+    "   |..[]..__....|.........|  |o . .  \n" + # noqa: CODE
+    "---|=====/  \=        ....|\-|-------\n" + # noqa: CODE
+    "   |-----|  |- SCHOOL ....|.\|__a_A_-\n"   # noqa: CODE
+)
+
 
 class GameScreen(urwid.LineBox):
     """Main game screen."""
@@ -9,7 +19,7 @@ class GameScreen(urwid.LineBox):
         self.state_manager = state_manager
         self.situation_manager = situation_manager
 
-        self.text = urwid.Text("placeholder")
+        self.text = urwid.Text(SCHOOL)
         self.fill = urwid.Filler(self.text, 'top')
         self.stats_box = urwid.LineBox(
             urwid.Filler(self.state_manager.player_stats.stat_list_text, 'middle'), title="stats")
