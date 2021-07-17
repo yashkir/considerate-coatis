@@ -27,8 +27,9 @@ class Situation:
 
     def get_option_stats_str(self, index) -> dict:
         """Returns the option stats as a string"""
-        l_str = ' ('
+        stats = []
+
         for x in self.options[index]['stats']:
-            l_str += f' {str(x)}: {str(self.options[index]["stats"][x])},'
-        l_str += ')'
-        return l_str
+            stats.append(f'{str(x)}: {str(self.options[index]["stats"][x])}')
+
+        return '(' + ', '.join(stats) + ')'
