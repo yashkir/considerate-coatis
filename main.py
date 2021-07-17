@@ -80,15 +80,15 @@ class GameController():
 
     def __start(self, signal_emitter=None):
         self.__show_difficulty_screen()
-        # self.game_screen.update_buttons(self.situation_manager.current_situation.get_option_response())
-        # self.game_screen.update_text()
-        # self.__show_game_screen()
 
     def __consequence(self, signal_emitter=None, choice=""):
         self.state_manager.apply_stats(choice)
 
     def __set_difficulty(self, signal_emitter=None, choice=""):
         self.state_manager.state[0]["difficulty"] = choice
+        self.game_screen.update_buttons(self.situation_manager.current_situation.get_option_response())
+        self.game_screen.update_text()
+        self.__show_game_screen()
 
     def __quit(self, signal_emitter=None):
         raise urwid.ExitMainLoop()

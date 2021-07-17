@@ -66,10 +66,13 @@ class GameScreen(urwid.LineBox):
                     + ': '
                     + str(response_list[r])
                     + '\n'
-                ), (
+                )]
+
+            if self.state_manager.state[0]["difficulty"] == "EASY":
+                button_markup.append((
                     'faded',
                     self.situation_manager.current_situation.get_option_stats_str(r)
-                )]
+                ))
 
             button = urwid.Button(button_markup, self.__choice)
             filler = urwid.Filler(button, 'top')
