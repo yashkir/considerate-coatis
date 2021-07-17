@@ -142,11 +142,12 @@ class GameController():
     # Overlay methods
 
     def __get_overlay_top(self):
-        return self.overlay.contents[1][0]
+        return self.overlay.contents[1][0].original_widget
 
     def __set_overlay(self, widget):
         """Replace the top widget of the main overlay"""
-        self.overlay = urwid.Overlay(widget, self.background,
+        widget_styled = urwid.AttrMap(widget, 'base')
+        self.overlay = urwid.Overlay(widget_styled, self.background,
                                      'center', OVERLAY_WIDTH, 'middle', OVERLAY_HEIGHT)
         self.loop.widget = self.overlay
 
